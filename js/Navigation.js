@@ -3,6 +3,9 @@
 
 
 
+
+
+
 //NavBar
 function hideIconBar() {
     var iconBar = document.getElementById("iconBar");
@@ -20,8 +23,8 @@ function showIconBar() {
 }
 
 // $(function(){
-//     $("#controller1").click(function(){
-//         $("#slideMenu").toggle();
+//     $("#controller1").click(function(){ //button
+//         $("#slideMenu").toggle();   //main div
 //     })
 //
 //     $("#controller2").click(function(){
