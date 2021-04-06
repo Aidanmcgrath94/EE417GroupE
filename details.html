@@ -43,22 +43,6 @@
         </div>
     </header>
 
-    <script>
-        //NavBar
-        function hideIconBar() {
-            var iconBar = document.getElementById("iconBar");
-            var navigation = document.getElementById("navigation");
-            iconBar.setAttribute("style", "display:none;");
-            navigation.classList.remove("hide");
-        }
-
-        function showIconBar() {
-            var iconBar = document.getElementById("iconBar");
-            var navigation = document.getElementById("navigation");
-            iconBar.setAttribute("style", "display:block;");
-            navigation.classList.add("hide");
-        }
-    </script>
 
     <div class="container">
         <!--Navigation-->
@@ -162,9 +146,14 @@
             <textarea name="reply" id="" placeholder="reply here ... "></textarea>
             <input type="submit" value="submit">
         </div>
-<footer>
-    <span>&copy; NerdStack Group</span>
-</footer>
+
+    <footer>
+        <span>&copy; NerdStack Group</span>
+    </footer>
+
+    <script src="js/JQuery/jquery.min.js"></script>
+    <script src="js/Navigation.js"></script>
+
+</div>
 
 </body>
-
