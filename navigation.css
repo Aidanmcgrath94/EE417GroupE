@@ -36,7 +36,7 @@ a {
     box-shadow: 0px 0px 6px 1px rgba(93, 173, 226, 0.7);
 }
 
-/*Slide Nav Unfold*/
+/*Slide Menu Unfold*/
 .menuFold {
     position: absolute;
     top: 0;
@@ -58,7 +58,7 @@ a {
 
 
 
-/*Slide Nav Unfold*/
+/*Slide Menu Unfold*/
 .menuUnfold {
     position: relative;
     padding: 35px 55px 35px 25px;
@@ -192,7 +192,6 @@ a {
 h3#mainTitle{
     text-align: center;
     font-size: 5em;
-    /*background-color: #00B16A;*/
     margin-top: -10px;
     margin-bottom: -10px;
 }
