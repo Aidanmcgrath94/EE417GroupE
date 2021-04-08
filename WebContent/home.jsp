@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    
+<%@ page import="user.User" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -19,6 +21,42 @@
 </head>
 
 <body>
+
+	<!-- User object, do with it as you wish
+	I have just printed values for now
+	You could inlude extra priveleges for admin
+	You could create different colour schem based on fvourite... -->
+    <div>
+      <% 
+      User newUser;
+      if((User)session.getAttribute("theUser") != null){
+    	  // Get firstname attribute
+    	  newUser = (User)session.getAttribute("theUser");
+    	  out.print("<h1>Welcome, " + newUser.getFname() + ": here are your details</h1><br>");
+    	  out.print("First name: " +  newUser.getFname() + "<br>");
+    	  out.print("Last name: " +  newUser.getLname() + "<br>");
+    	  out.print("Username: " +  newUser.getUsername() + "<br>");
+    	  out.print("email: " +  newUser.getEmail() + "<br>");
+    	  out.print("Favourite: " +  newUser.getFavourite() + "<br><br>");
+    	  if(newUser.isAdmin() == true){
+    		  out.print("You are an admin.. here are your access priveleges<br>");
+    	  }
+    	  else{
+    		  out.print("You are just a regular user.. too bad!");
+    	  }
+      }     
+      %>
+    </div>	
+    
+    
+    <!-- Logout button.. style as you wish -->
+    <div>
+    <form action = "logoutservlet" method="post">
+  		<button type="submit">Click here to logout</button>
+	</form>
+    </div>
+    
+    
     <header>
 
     <div class="slideNav">
@@ -179,6 +217,4 @@
 
     <script src="js/jquery-3.5.1.js"></script>
     <script src="js/navigation.js"></script>
-
-
 </body>

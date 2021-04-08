@@ -7,14 +7,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NS - Posts</title>
-    <link rel="stylesheet" href="posts.css">
-    <link rel="stylesheet" href="navigation.css">
+    <link rel="stylesheet" href="CSS/posts.css">
+    <link rel="stylesheet" href="CSS/navigation.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:ital@1&display=swap" rel="stylesheet">
 </head>
 
 <body>
+    Add a post here<br>
+    <!--  
+   <form action="processpostservlet" method="post" name="loginform">   
+     <label>Username : </label>   
+     <input type="text" placeholder="Enter Username" name="name" required>  
+     <label>Password : </label>   
+     <input type="password" placeholder="Enter Password" name="password" required>  
+     <button type="submit">Login</button>       
+   </form><br><br>-->
+
+
     <header>
 
         <div class="slideNav">

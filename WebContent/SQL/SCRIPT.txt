@@ -1,0 +1,25 @@
+CREATE TABLE PROFILES(
+USER_ID integer,
+Username VARCHAR(30) NOT NULL,
+Passwrd VARCHAR(30) NOT NULL,
+Firstname varchar(30),
+Lastname varchar(30),
+email varchar(255),
+favourite varchar(30),
+is_admin bit,
+primary key(USER_ID, Username));
+
+INSERT INTO PROFILES VALUES(
+1, "user1", "password1", "John", "Doe", "john@email.com", "option1" , 1);
+
+INSERT INTO PROFILES VALUES(
+2, "user2", "password2", "Mike", "Denver", "mike@email.com", "option2", 0);
+
+INSERT INTO PROFILES VALUES(
+3, "user3", "password3", "Jimmy", "Moran", "jimmy@email.com", "option3", 0);
+
+INSERT INTO PROFILES VALUES(
+4, "user4", "password4", "Mary", "Murphy", "mary@email.com", "option4", 1);
+
+INSERT INTO PROFILES VALUES(
+5, "user5", "password5", "Aine", "Murray", "aine@email.com", "option5", 1);
