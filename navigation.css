@@ -9,7 +9,7 @@ a {
 /*Sliding Menu*/
 .slideNav {
     float: left;
-    position: absolute;
+    position: fixed;
     min-height: 100%;
     width: 500px;
     z-index: 1000;
@@ -27,7 +27,7 @@ a {
 }
 .slideNav.open .menuFold:after {
     content: '';
-    position: absolute;
+    position: fixed;
     top: 0;
     right: 0;
     width: 1px;
@@ -38,7 +38,7 @@ a {
 
 /*Slide Menu Unfold*/
 .menuFold {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -133,7 +133,7 @@ a {
 
 /*Button to open*/
 .menuBtn {
-    position: absolute;
+    position: fixed;
     width: 40px;
     height: 40px;
     top: 38px;
@@ -195,3 +195,24 @@ h3#mainTitle{
     margin-top: -10px;
     margin-bottom: -10px;
 }
+
+#switchButton{
+    color: white;
+    position: fixed;
+    bottom: 50px;
+    left: 50px;
+    /*transition-delay: .5s;*/
+}
+
+#switchButton:hover{
+    color: orange;
+}
+
+
+
+#quoteSentence{
+    max-width: 350px;
+    /*background-color: #3498DB;*/
+}
+
+
