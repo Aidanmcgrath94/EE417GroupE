@@ -46,6 +46,7 @@
     	  }
       }     
       %>
+      <a href="posts.jsp">Go to posts</a><br>
     </div>	
     
     

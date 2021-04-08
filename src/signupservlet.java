@@ -93,7 +93,7 @@ public class signupservlet extends HttpServlet {
 					  pstmt.setString(4, fname);
 					  pstmt.setString(5, lname);
 					  pstmt.setString(6, usermail);
-					  pstmt.setString(7, favourite);;
+					  pstmt.setString(7, favourite);
 					  if(admin_pass.equals("admin123")) {
 						  admin = true;
 						  pstmt.setInt(8, 1);

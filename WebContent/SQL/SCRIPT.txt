@@ -23,3 +23,26 @@ INSERT INTO PROFILES VALUES(
 
 INSERT INTO PROFILES VALUES(
 5, "user5", "password5", "Aine", "Murray", "aine@email.com", "option5", 1);
+
+
+CREATE TABLE POSTS(
+Post_ID integer,
+Author_ID integer,
+Subject VARCHAR(255) NOT NULL,
+Body VARCHAR(255) NOT NULL,
+primary key(Post_ID));
+
+INSERT INTO POSTS VALUES(
+1, 1, "This is the subject 1", "This is the body 1");
+
+INSERT INTO POSTS VALUES(
+2, 1, "This is the subject 2", "This is the body 2");
+
+INSERT INTO POSTS VALUES(
+3, 2, "This is the subject 3", "This is the body 3");
+
+INSERT INTO POSTS VALUES(
+4, 3, "This is the subject 4", "This is the body 4");
+
+INSERT INTO POSTS VALUES(
+5, 4, "This is the subject 5", "This is the body 5");

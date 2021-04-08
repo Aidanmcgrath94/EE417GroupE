@@ -16,14 +16,17 @@
 
 <body>
     Add a post here<br>
-    <!--  
-   <form action="processpostservlet" method="post" name="loginform">   
-     <label>Username : </label>   
-     <input type="text" placeholder="Enter Username" name="name" required>  
-     <label>Password : </label>   
-     <input type="password" placeholder="Enter Password" name="password" required>  
-     <button type="submit">Login</button>       
-   </form><br><br>-->
+    <!-- Form for user to add a post
+    Place and style as you wish -->
+   
+   Enter your post here..
+   <form action="processpostservlet" method="post" name="processpost">   
+     <label>Subject : </label>   
+     <input type="text" placeholder="Enter subject.." name="subject" required>  
+     <label>Body : </label>   
+     <input type="text" placeholder="Enter body.." name="body" required>  
+     <button type="submit">Post!</button>       
+   </form><br><br>
 
 
     <header>
