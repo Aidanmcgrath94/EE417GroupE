@@ -75,7 +75,7 @@ public class processpostservlet extends HttpServlet {
 	     	     stmt = con.createStatement();
 	     	     
 	     	     // Create a prepared statement for insert
-	     	    PreparedStatement pstmt = con.prepareStatement("INSERT INTO mydata.posts(Post_id, author_id, subject, body) VALUES (?,?,?,?)");
+	     	    PreparedStatement pstmt = con.prepareStatement("INSERT INTO mydata.posts(Post_id, author, subject, body, likes) VALUES (?,?,?,?, ?)");
 				  pstmt.clearParameters();       // Clears any previous parameters
 				  // Add values
 				  int post_id = (int)(Math.random() * 1000000);
@@ -83,16 +83,17 @@ public class processpostservlet extends HttpServlet {
 				  
 				  HttpSession session=request.getSession(false);
 				  User newUser;
-				  int author_id = -1;
+				  String author = "";
 			      if((User)session.getAttribute("theUser") != null){
 			    	  newUser = (User)session.getAttribute("theUser");
-			    	  author_id = newUser.getId();
+			    	  author = newUser.getUsername();
 			      }
 				  
 			      pstmt.setInt(1, post_id);
-				  pstmt.setInt(2, author_id);
+				  pstmt.setString(2, author);
 				  pstmt.setString(3, subject);
 				  pstmt.setString(4, body);
+				  pstmt.setInt(5, 0);
 				  // Execute the insert
 				  pstmt.executeUpdate();
 

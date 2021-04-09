@@ -1,5 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    
+<%@ page import = "java.io.*,java.util.*,java.sql.*"%>
+<%@ page import = "javax.servlet.http.*,javax.servlet.*" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix = "c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix = "sql"%>
+
+<%@ page import="user.User" %>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,6 +23,9 @@
 </head>
 
 <body>
+<sql:setDataSource var = "snapshot" driver = "com.mysql.jdbc.Driver"
+         url = "jdbc:mysql://localhost:3306"
+         user = "root"  password = "test"/>
     Add a post here<br>
     <!-- Form for user to add a post
     Place and style as you wish -->
@@ -27,7 +38,60 @@
      <input type="text" placeholder="Enter body.." name="body" required>  
      <button type="submit">Post!</button>       
    </form><br><br>
+   
+   <!-- for displaying posts
+    Place and style as you wish-->
+   <%
+    User newUser;
+    int user_id = -1;
+    if((User)session.getAttribute("theUser") != null){
+      newUser = (User)session.getAttribute("theUser");
+	  user_id = newUser.getId();
+    }
+   %> 
+   
+ 
+    <sql:query dataSource = "${snapshot}" var = "result">
+SELECT * FROM mydata.posts ORDER BY likes DESC   </sql:query>
 
+<table>
+   <tr>
+      <th>author</th>
+      <th>subject</th>
+      <th>post</th>
+      <th>likes</th>
+   </tr>
+   
+  <c:forEach var = "row" items = "${result.rows}">
+    <form action = "like_comment_servlet" method="post">
+      <input type='hidden' name='post_id' value="${row.post_id}">    
+      <input type='hidden' name='user_id' value= "<%=user_id%>">
+      <tr>   
+         <td><c:out value = "${row.author}"/> </td>
+         <td><c:out value = "${row.subject}"/></td>
+         <td><c:out value = "${row.body}"/></td>
+         <td><c:out value = "${row.likes}"/></td>      
+         <td> <input type="submit" name="action" value="like"></td> 
+         <td><input type="text" name="user_comment" placeholder="comment.."></td>
+         <td> <input type="submit" name="action" value="comment"></td>   
+      </tr>
+      </form>
+      <sql:query dataSource = "${snapshot}" var = "result2">
+SELECT * FROM mydata.comments where post_id = ${row.post_id}</sql:query>
+		<table>
+        <c:forEach var = "row" items = "${result2.rows}">
+          <tr>   
+         <td><c:out value = "${row.post_id}"/> </td>
+         <td><c:out value = "${row.author}"/></td>
+         <td><c:out value = "${row.comment}"/></td>
+         </tr>
+        </c:forEach>
+        </table>
+    
+   </c:forEach>
+</table>
+
+  		
 
     <header>
 

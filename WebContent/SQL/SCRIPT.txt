@@ -27,22 +27,29 @@ INSERT INTO PROFILES VALUES(
 
 CREATE TABLE POSTS(
 Post_ID integer,
-Author_ID integer,
-Subject VARCHAR(255) NOT NULL,
-Body VARCHAR(255) NOT NULL,
+Author varchar(255),
+Subject VARCHAR(255),
+Body VARCHAR(255),
+likes integer,
 primary key(Post_ID));
 
 INSERT INTO POSTS VALUES(
-1, 1, "This is the subject 1", "This is the body 1");
+1, 1, "This is the subject 1", "This is the body 1", 0);
 
 INSERT INTO POSTS VALUES(
-2, 1, "This is the subject 2", "This is the body 2");
+2, 1, "This is the subject 2", "This is the body 2", 0);
 
 INSERT INTO POSTS VALUES(
-3, 2, "This is the subject 3", "This is the body 3");
+3, 2, "This is the subject 3", "This is the body 3", 0);
 
 INSERT INTO POSTS VALUES(
-4, 3, "This is the subject 4", "This is the body 4");
+4, 3, "This is the subject 4", "This is the body 4", 0);
 
 INSERT INTO POSTS VALUES(
-5, 4, "This is the subject 5", "This is the body 5");
+5, 4, "This is the subject 5", "This is the body 5", 0);
+
+CREATE TABLE Comments(
+comment_id integer,
+post_id integer,
+author varchar(255),
+comment varchar(255));
