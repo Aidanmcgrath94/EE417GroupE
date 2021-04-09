@@ -1,3 +1,8 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+    
+<%@ page import="user.User" %>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,8 +11,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NS - Home</title>
-    <link rel="stylesheet" href="home.css">
-    <link rel="stylesheet" href="navigation.css">
+    <link rel="stylesheet" href="CSS/home.css">
+    <link rel="stylesheet" href="CSS/navigation.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:ital@1&display=swap" rel="stylesheet">
@@ -16,6 +21,43 @@
 </head>
 
 <body>
+
+	<!-- User object, do with it as you wish
+	I have just printed values for now
+	You could inlude extra priveleges for admin
+	You could create different colour schem based on fvourite... -->
+    <div>
+      <% 
+      User newUser;
+      if((User)session.getAttribute("theUser") != null){
+    	  // Get firstname attribute
+    	  newUser = (User)session.getAttribute("theUser");
+    	  out.print("<h1>Welcome, " + newUser.getFname() + ": here are your details</h1><br>");
+    	  out.print("First name: " +  newUser.getFname() + "<br>");
+    	  out.print("Last name: " +  newUser.getLname() + "<br>");
+    	  out.print("Username: " +  newUser.getUsername() + "<br>");
+    	  out.print("email: " +  newUser.getEmail() + "<br>");
+    	  out.print("Favourite: " +  newUser.getFavourite() + "<br><br>");
+    	  if(newUser.isAdmin() == true){
+    		  out.print("You are an admin.. here are your access priveleges<br>");
+    	  }
+    	  else{
+    		  out.print("You are just a regular user.. too bad!");
+    	  }
+      }     
+      %>
+      <a href="posts.jsp">Go to posts</a><br>
+    </div>	
+    
+    
+    <!-- Logout button.. style as you wish -->
+    <div>
+    <form action = "logoutservlet" method="post">
+  		<button type="submit">Click here to logout</button>
+	</form>
+    </div>
+    
+    
     <header>
 
     <div class="slideNav">
@@ -42,7 +84,7 @@
             <a href="#" class="closeBtn"><i class="fa fa-close"></i>&nbsp; Close menu</a>
 
 <!--            <div style="height: 250px"></div>-->
-            <a href="#"><i id="switchButton" class="fa fa-gg-circle fa-lg"></i></a>
+            <a href="#"><i id="switchButton" class="fa fa-gg-circle"></i></a>
 
         </div>
 
@@ -51,9 +93,7 @@
 
     <h3 id="mainTitle">NerdStack</h3>
 
-    <a href="#" id="accountButton"><i class="fa fa-user-circle"></i></a>
-
-        <!--SearchBox Section-->
+    <!--SearchBox Section-->
     <div class="search-box">
         <div>
             <select>
@@ -178,8 +218,4 @@
 
     <script src="js/jquery-3.5.1.js"></script>
     <script src="js/navigation.js"></script>
-
-
 </body>
-
-
