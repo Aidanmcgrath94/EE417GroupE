@@ -208,11 +208,21 @@ h3#mainTitle{
     color: orange;
 }
 
-
-
 #quoteSentence{
     max-width: 350px;
-    /*background-color: #3498DB;*/
 }
 
+#accountButton{
+    position: fixed;
+    top: 45px;
+    right: 50px;
+    color: white;
+    font-size: 40px;
+}
+
+#accountButton:hover{
+    /*transition: left 3s;*/
+    transition-duration: 0.4s;
+    color: orange;
+}
 
