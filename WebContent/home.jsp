@@ -86,6 +86,8 @@
 <!--            <div style="height: 250px"></div>-->
             <a href="#"><i id="switchButton" class="fa fa-gg-circle"></i></a>
 
+            <a href="#"><i id="accountButton" class="fa fa-user-circle"></i></a>
+
         </div>
 
     </div>
