@@ -16,7 +16,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import user.User;
+import dao.PostDao;
+import dao.PostDaoImpl;
+import dao.UserDao;
+import dao.UserDaoImpl;
+import entity.Post;
+import entity.User;
 
 /**
  * Servlet implementation class processpostservlet
@@ -38,16 +43,35 @@ public class processpostservlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
+		PrintWriter out = response.getWriter();
+		
+		// Get parameters from form
+        String subject=request.getParameter("subject");
+        String body=request.getParameter("body");
+        
+        HttpSession session=request.getSession(false);
+		User newUser;
+		String author = "";
+		
+	    if((User)session.getAttribute("theUser") != null){
+	    	newUser = (User)session.getAttribute("theUser");
+	    	author = newUser.getUsername();
+	    }
+	    
+	    PostDao postDao=new PostDaoImpl();
+        Post new_post;
+        
+        new_post = postDao.addPost(author,subject,body);
+
+	    request.getRequestDispatcher("posts.jsp").include(request, response);
+		
+		/*response.setContentType("text/html");
 		Connection con = null;
         Statement stmt = null;
         ResultSet rs = null;
         
-        /*
-         * *****************************************
-         * NEED TO FIGURE OUT THESE
-         * ****************************************
-         * 
-         */
+        
+         
         String JDBCUrl = "jdbc:mysql://localhost:3306";
         String username = "root";
         String password = "test";
@@ -116,7 +140,7 @@ public class processpostservlet extends HttpServlet {
           	  System.out.println("An error occurred while closing down connection/statement"); 
              }
        
-        }
+        }*/
         
 	}
 

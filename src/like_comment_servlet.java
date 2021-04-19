@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import user.User;
+import entity.User;
 
 /**
  * Servlet implementation class like_comment_servlet
@@ -82,14 +82,14 @@ public class like_comment_servlet extends HttpServlet {
 		         
 		         int likes = 0;
 		         
-		         rs = stmt.executeQuery("SELECT * FROM mydata.posts where Post_ID=\"" + post_id + "\";");
+		         rs = stmt.executeQuery("SELECT * FROM mydata.post where _ID=\"" + post_id + "\";");
 		         if (rs.next()) {   // 
 		 		    	likes = rs.getInt("likes");
 		 		    	likes++;
 		         }
 		         
-		         String sql = "UPDATE mydata.posts SET likes=?";
-		         sql += " WHERE Post_ID = ?";
+		         String sql = "UPDATE mydata.post SET likes=?";
+		         sql += " WHERE _ID = ?";
 		 		 PreparedStatement pstmt = con.prepareStatement(sql);
 		 		  
 		 		 // Add values to the prepared statement
@@ -128,9 +128,9 @@ public class like_comment_servlet extends HttpServlet {
 		     	     
 		     	    String author = "";
 			         
-			         rs = stmt.executeQuery("SELECT * FROM mydata.profiles where User_ID=\"" + user_id + "\";");
+			         rs = stmt.executeQuery("SELECT * FROM mydata.user where _ID=\"" + user_id + "\";");
 			         if (rs.next()) {   // 
-			 		    	author = rs.getString("likes");
+			 		    	author = rs.getString("username");
 			         }
 		     	     
 		     	     // Create a prepared statement for insert

@@ -1,3 +1,85 @@
+CREATE TABLE IF NOT EXISTS user(
+   _id INT UNSIGNED AUTO_INCREMENT,
+   username VARCHAR(32) NOT NULL UNIQUE,
+   password VARCHAR(32) NOT NULL,
+   firstName VARCHAR(32) NOT NULL,
+   lastName VARCHAR(32) NOT NULL,
+   mailAddress VARCHAR(64) NOT NULL,
+   isValid BOOLEAN,
+   isAdmin BOOLEAN,
+   createdDate DATE,
+   PRIMARY KEY ( _id )
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+INSERT INTO user values 
+ ( 0,"root", "root", "ro", "ot", "root@gmail.com",true,true,Now()),
+ (0,"a","abc","a","bc","abc@123.com",true,false,now());
+SELECT LAST_INSERT_ID();
+
+SELECT createdDate from user where _id=7;
+
+SELECT * FROM user where username='root' AND password='root';
+
+
+
+CREATE TABLE IF NOT EXISTS post(
+   _id INT UNSIGNED AUTO_INCREMENT,
+   author VARCHAR(32),
+   subject VARCHAR(32) NOT NULL,
+   body VARCHAR(255) NOT NULL,
+   createdDate DATE,
+   likes integer,
+   PRIMARY KEY ( _id )
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+INSERT INTO post values 
+ ( 0,"author1", "subject1", "body1", now(), 0),
+ ( 0,"author2", "subject2", "body2", now(), 0);
+SELECT LAST_INSERT_ID();
+
+SELECT createdDate from post where _id=7;
+
+SELECT * FROM post;
+
+
+
+
+
+
+
+CREATE TABLE IF NOT EXISTS Comments(
+comment_id integer,
+post_id integer,
+author varchar(255),
+comment varchar(255));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+DONT USE THIS!!!!
+
 CREATE TABLE PROFILES(
 USER_ID integer,
 Username VARCHAR(30) NOT NULL,

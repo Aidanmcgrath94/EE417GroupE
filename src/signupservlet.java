@@ -16,7 +16,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import user.User;
+import dao.UserDao;
+import dao.UserDaoImpl;
+import entity.User;
 
 /**
  * Servlet implementation class signupservlet
@@ -38,20 +40,56 @@ public class signupservlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
-		Connection con = null;
-        Statement stmt = null;
-        ResultSet rs = null;
+		PrintWriter out = response.getWriter();
+		
+		String fname=request.getParameter("firstname");
+        String lname=request.getParameter("lastname");
+        String uname=request.getParameter("username");
+        String usermail=request.getParameter("usermail");
+        String favourite = request.getParameter("favourite"); 
+        String pass=request.getParameter("password");
+        String confirm_pass=request.getParameter("confirm_password");
+        String admin_pass=request.getParameter("admin_password");
         
-        /*
-         * *****************************************
-         * NEED TO FIGURE OUT THESE
-         * ****************************************
-         * 
-         */
+        UserDao userDao=new UserDaoImpl();
+        User new_user;
+        
+        if(pass.equals(confirm_pass)) {
+        	if(admin_pass.equals("admin123")) {
+        		new_user = userDao.addUser(uname,pass,fname,lname,usermail, true);
+        	}
+        	else {
+        		new_user = userDao.addUser(uname,pass,fname,lname,usermail, false);
+        	}
+        	HttpSession session = request.getSession();
+			//Add the user
+        	session.setAttribute("theUser", new_user);
+        	// Set session expiry time
+			session.setMaxInactiveInterval(600);
+			request.getRequestDispatcher("home.jsp").include(request, response);
+        }
+        else {
+        	out.print("Please enter matching passwords<br><br><br>");
+        	request.getRequestDispatcher("signup.jsp").include(request, response);    		
+    		out.close();
+        }
+        
+       // userDao.verifyUsername("root","root");
+       // userDao.addUser("baz","123","a","b","123@123.com");
+       // userDao.usernameExist("root");
+		
+		/*response.setContentType("text/html");
+		//Connection con = null;
+        //Statement stmt = null;
+        //ResultSet rs = null;
+        
+        
+        
+
         String JDBCUrl = "jdbc:mysql://localhost:3306";
         String username = "root";
         String password = "test";
-        PrintWriter out = response.getWriter();
+        
         try {
             System.out.println("\nConnecting to the SSD Database......");
             Class.forName("com.mysql.jdbc.Driver");
@@ -79,8 +117,13 @@ public class signupservlet extends HttpServlet {
 		// If the two supplied passwords match
         if(pass.equals(confirm_pass)) {
 	        try {
+	        	
+	        	//userDao.addUser("abc","123","a","b","123@123.com");
+	        	
 			     System.out.println("\nConnection Successful..... creating statement....");
 		     	     stmt = con.createStatement();
+		     	     
+		     	    
 		     	     
 		     	     // Create a prepared statement for insert
 		     	    PreparedStatement pstmt = con.prepareStatement("INSERT INTO mydata.profiles(USER_id,username,Passwrd,Firstname,Lastname,email,favourite, is_admin) VALUES (?,?,?,?,?,?,?,?)");
@@ -140,7 +183,7 @@ public class signupservlet extends HttpServlet {
         	request.getRequestDispatcher("signup.jsp").include(request, response);
     		
     		out.close();
-        }
+        }*/
 	}
 
 	/**

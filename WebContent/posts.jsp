@@ -6,7 +6,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix = "c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix = "sql"%>
 
-<%@ page import="user.User" %>
+<%@ page import="entity.User" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -41,46 +41,53 @@
    
    <!-- for displaying posts
     Place and style as you wish-->
+    
    <%
     User newUser;
     int user_id = -1;
     if((User)session.getAttribute("theUser") != null){
       newUser = (User)session.getAttribute("theUser");
-	  user_id = newUser.getId();
+	  user_id = newUser.get_id();
     }
    %> 
    
  
     <sql:query dataSource = "${snapshot}" var = "result">
-SELECT * FROM mydata.posts ORDER BY likes DESC   </sql:query>
+SELECT * FROM mydata.post ORDER BY likes DESC   </sql:query>
 
 <table>
    <tr>
       <th>author</th>
       <th>subject</th>
       <th>post</th>
+      <th>date</th>
       <th>likes</th>
    </tr>
-   
-  <c:forEach var = "row" items = "${result.rows}">
+    <c:forEach var = "row" items = "${result.rows}">
     <form action = "like_comment_servlet" method="post">
-      <input type='hidden' name='post_id' value="${row.post_id}">    
-      <input type='hidden' name='user_id' value= "<%=user_id%>">
-      <tr>   
-         <td><c:out value = "${row.author}"/> </td>
-         <td><c:out value = "${row.subject}"/></td>
-         <td><c:out value = "${row.body}"/></td>
-         <td><c:out value = "${row.likes}"/></td>      
-         <td> <input type="submit" name="action" value="like"></td> 
-         <td><input type="text" name="user_comment" placeholder="comment.."></td>
-         <td> <input type="submit" name="action" value="comment"></td>   
-      </tr>
-      </form>
-      <sql:query dataSource = "${snapshot}" var = "result2">
-SELECT * FROM mydata.comments where post_id = ${row.post_id}</sql:query>
+    <input type='hidden' name='post_id' value="${row._id}">    
+    <input type='hidden' name='user_id' value= "<%=user_id%>">
+   <tr>   
+       <td><c:out value = "${row.author}"/> </td>
+       <td><c:out value = "${row.subject}"/></td>
+       <td><c:out value = "${row.body}"/></td>
+       <td><c:out value = "${row.createdDate}"/></td>
+       <td><c:out value = "${row.likes}"/></td>
+       <td> <input type="submit" name="action" value="like"></td> 
+       <td><input type="text" name="user_comment" placeholder="comment.."></td>
+       <td> <input type="submit" name="action" value="comment"></td>      
+    </tr>
+    </form>
+    <sql:query dataSource = "${snapshot}" var = "result2">
+SELECT * FROM mydata.comments where post_id = ${row._id}</sql:query>
 		<table>
+		<tr>
+      	<th>Post ID</th>
+	    <th>Author</th>
+	    <th>Comment</th>
+   		</tr>
         <c:forEach var = "row" items = "${result2.rows}">
-          <tr>   
+        <tr>   
          <td><c:out value = "${row.post_id}"/> </td>
          <td><c:out value = "${row.author}"/></td>
          <td><c:out value = "${row.comment}"/></td>
@@ -90,8 +97,10 @@ SELECT * FROM mydata.comments where post_id = ${row.post_id}</sql:query>
     
    </c:forEach>
 </table>
+   
 
-  		
+
+	
 
     <header>
 

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     
-<%@ page import="user.User" %>
+<%@ page import="entity.User" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -32,12 +32,12 @@
       if((User)session.getAttribute("theUser") != null){
     	  // Get firstname attribute
     	  newUser = (User)session.getAttribute("theUser");
-    	  out.print("<h1>Welcome, " + newUser.getFname() + ": here are your details</h1><br>");
-    	  out.print("First name: " +  newUser.getFname() + "<br>");
-    	  out.print("Last name: " +  newUser.getLname() + "<br>");
+    	  out.print("<h1>Welcome, " + newUser.getFirstName() + ": here are your details</h1><br>");
+    	  out.print("First name: " +  newUser.getFirstName() + "<br>");
+    	  out.print("Last name: " +  newUser.getLastName() + "<br>");
     	  out.print("Username: " +  newUser.getUsername() + "<br>");
     	  out.print("email: " +  newUser.getEmail() + "<br>");
-    	  out.print("Favourite: " +  newUser.getFavourite() + "<br><br>");
+    	  //out.print("Favourite: " +  newUser.getFavourite() + "<br><br>");
     	  if(newUser.isAdmin() == true){
     		  out.print("You are an admin.. here are your access priveleges<br>");
     	  }

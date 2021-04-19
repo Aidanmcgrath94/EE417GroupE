@@ -15,7 +15,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import user.*;
+import entity.User;
+import dao.*;
 
 /**
  * Servlet implementation class loginservlet
@@ -37,21 +38,46 @@ public class loginservlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
+		PrintWriter out = response.getWriter();
+		
+		String username=request.getParameter("name");
+		String password=request.getParameter("password");
+		
+		UserDao userDao=new UserDaoImpl();
+		User new_user;
+		if(userDao.usernameExist(username) == true) {
+			if(userDao.verifyUsername(username,password) != null) {
+				new_user = userDao.verifyUsername(username,password);
+				HttpSession session = request.getSession();
+				
+				//Add the user to the sessions
+				session.setAttribute("theUser", new_user);
+				// Set session expiry time
+				session.setMaxInactiveInterval(600);
+				request.getRequestDispatcher("home.jsp").include(request, response);
+			}
+			else {	// Login unsuccessful
+		    	// Display index.jsp with appropriate message
+				request.getRequestDispatcher("login.jsp").include(request, response);
+				out.print("Sorry, password is incorrect! Try again");
+		     }
+		}
+		else {	// Login unsuccessful
+	    	// Display index.jsp with appropriate message
+			request.getRequestDispatcher("login.jsp").include(request, response);
+			out.print("Sorry, username does not exist! Try again");
+	     }
+		/*response.setContentType("text/html");
+		PrintWriter out = response.getWriter();
 		Connection con = null;
         Statement stmt = null;
         ResultSet rs = null;
               
-        /*
-         * *****************************************
-         * NEED TO FIGURE OUT THESE
-         * ****************************************
-         * 
-         */
-			
+        
        String JDBCUrl = "jdbc:mysql://localhost:3306";
        String username = "root";
        String password = "test";
-       PrintWriter out = response.getWriter();
+       
        
         try {
             System.out.println("\nConnecting to the SSD Database......");
@@ -63,7 +89,7 @@ public class loginservlet extends HttpServlet {
                     + "  classes unable to be found.  Otherwise the database itself may be down.  Try telneting to port 3306 and see if it is up!");
             e.printStackTrace();
             System.exit(0);
-        }  
+        } 
 	
 		
 		// Get parameters
@@ -126,7 +152,7 @@ public class loginservlet extends HttpServlet {
            	  System.out.println("An error occurred while closing down connection/statement"); 
               }
         
-         }
+         }*/
 	}
 
 	/**

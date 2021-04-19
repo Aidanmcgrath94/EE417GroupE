@@ -48,7 +48,7 @@
 	<input type="password" id="admin_pass" name="admin_password"
            placeholder="admin password.."><br>
             
-  <button type="submit">Login</button>       
+  <button type="submit">Sign up!</button>       
 </form>
 </body>
 </html>
