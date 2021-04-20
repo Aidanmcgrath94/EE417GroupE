@@ -5,9 +5,9 @@ import entity.User;
 
 public interface PostDao {
 
-	Post addPost(String author, String subject, String body);
+	public Post addPost(String author, String subject, String body);
 	
-	void incrementLikes(int post_id);
+	public boolean incrementLikes(int post_id);
 
 	//Post getPost(int id); ??
 	

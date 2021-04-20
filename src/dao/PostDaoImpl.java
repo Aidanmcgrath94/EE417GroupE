@@ -67,11 +67,32 @@ public class PostDaoImpl implements PostDao{
     }
 
 	@Override
-	public void incrementLikes(int post_id) {
+	public boolean incrementLikes(int post_id) {
 		// TODO Auto-generated method stub
-		
+		Connection connection=null;
+        PreparedStatement preparedStatement=null;
+        Statement statement=null;
+        ResultSet resultSet=null;
+        boolean ret = false;
+        try{
+        	connection=ConnectionSource.getConnection();	
+        	String sql = "UPDATE post SET likes=likes+1 where _id=?";
+	 		preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1,post_id);
+            preparedStatement.execute();  
+        	ret = true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try{
+                if(connection!=null) connection.close();
+                if(preparedStatement!=null) preparedStatement.close();
+                if(statement!=null) statement.close();
+                if(resultSet!=null) resultSet.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return ret;
 	}
-
-    
-
 }
