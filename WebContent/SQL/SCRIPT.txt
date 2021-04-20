@@ -45,11 +45,14 @@ SELECT * FROM post;
 
 
 
-CREATE TABLE IF NOT EXISTS Comments(
-comment_id integer,
-post_id integer,
-author varchar(255),
-comment varchar(255));
+CREATE TABLE IF NOT EXISTS comments(
+  _id INT UNSIGNED AUTO_INCREMENT,
+  post_id integer,
+  author VARCHAR(255),
+  comment VARCHAR(255),
+  createdDate DATE,
+  PRIMARY KEY ( _id )
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 

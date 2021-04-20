@@ -1,6 +1,8 @@
 package dao;
 
+import entity.Comment;
+
 public interface CommentDao {
-	public void addComment(int post_id, String author, String comment);
+	public Comment addComment(int post_id, String author, String comment);
 
 }
