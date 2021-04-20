@@ -66,6 +66,12 @@ public class PostDaoImpl implements PostDao{
         return post;
     }
 
+	@Override
+	public void incrementLikes(int post_id) {
+		// TODO Auto-generated method stub
+		
+	}
+
     
 
 }

@@ -159,4 +159,36 @@ public class UserDaoImpl implements UserDao{
         userDao.addUser("baz","123","a","b","123@123.com", true);
         userDao.usernameExist("root");
     }
+
+	@Override
+	public String getUsername(int user_id) {
+		// TODO Auto-generated method stub
+		Connection connection=null;
+        PreparedStatement preparedStatement=null;
+        Statement statement=null;
+        ResultSet resultSet=null;
+        String author = "";
+		try{
+            connection=ConnectionSource.getConnection();
+            String sql="SELECT * FROM user where _ID=?";
+            preparedStatement=connection.prepareStatement(sql);
+            preparedStatement.setInt(1,user_id);
+            resultSet=preparedStatement.executeQuery();
+            if(resultSet.next()) {
+            	author = resultSet.getString("username");
+            }
+        }catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try{
+                if(connection!=null) connection.close();
+                if(preparedStatement!=null) preparedStatement.close();
+                if(statement!=null) statement.close();
+                if(resultSet!=null) resultSet.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+		return author;
+	}
 }
