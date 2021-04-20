@@ -1,5 +1,5 @@
 package dao;
 
-public class CommentDaoImpl {
+public class CommentDaoImpl implements CommentDao{
 
 }

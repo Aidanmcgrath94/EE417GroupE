@@ -16,6 +16,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.UserDao;
+import dao.UserDaoImpl;
+import dao.PostDao;
+import dao.PostDaoImpl;
+import dao.CommentDao;
+import dao.CommentDaoImpl;
 import entity.User;
 
 /**
@@ -38,17 +44,33 @@ public class like_comment_servlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
+		PrintWriter out = response.getWriter();
+		
+		// Get parameters
+		String action=request.getParameter("action");
+		int post_id = Integer.parseInt(request.getParameter("post_id"));
+		int user_id = Integer.parseInt(request.getParameter("user_id"));
+		String comment = request.getParameter("user_comment");
+		
+		PostDao postDao=new PostDaoImpl();
+		UserDao userDao = new UserDaoImpl();
+		CommentDao commentDao = new CommentDaoImpl();
+		
+		if(action.equals("like")) {
+			postDao.incrementLikes(post_id);
+		}
+		else if(action.equals("comment")) {
+			String author = userDao.getUsername(user_id);
+			commentDao.addComment(post_id, author, comment);
+		}
+		
+		request.getRequestDispatcher("posts.jsp").include(request, response);
+		
+		/*
+		response.setContentType("text/html");
 		Connection con = null;
         Statement stmt = null;
-        ResultSet rs = null;
-              
-        /*
-         * *****************************************
-         * NEED TO FIGURE OUT THESE
-         * ****************************************
-         * 
-         */
-			
+        ResultSet rs = null;		
        String JDBCUrl = "jdbc:mysql://localhost:3306";
        String username = "root";
        String password = "test";
@@ -169,7 +191,7 @@ public class like_comment_servlet extends HttpServlet {
 	       
 	        }
 			
-		}
+		}*/
 		
 		
 	}

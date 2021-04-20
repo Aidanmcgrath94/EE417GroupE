@@ -33,5 +33,12 @@ public interface UserDao {
      * @return
      */
     public User verifyUsername(String username,String password);
+    
+    /**
+     * Returns the username given the id of the user
+     * @param user_id
+     * @return username
+     */
+    public String getUsername(int user_id);
 
 }
