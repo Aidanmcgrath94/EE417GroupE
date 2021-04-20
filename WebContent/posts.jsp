@@ -97,8 +97,59 @@ SELECT * FROM mydata.comments where post_id = ${row._id}</sql:query>
     
    </c:forEach>
 </table>
-   
 
+<div style="margin:100px; padding:100px;">
+	Search here..
+	<form action="posts.jsp" method="post" name="searchpost">     
+     <input type="text" placeholder="search.." name="search" required>   
+     <button type="submit">Search</button>       
+   </form><br><br>
+   
+   <%
+    String searchString = "";
+    if(request.getParameter("search") != null){
+    	searchString = request.getParameter("search");
+    }
+    boolean toSearch = false;
+    if(!searchString.equals("")){
+    	toSearch = true;
+    }
+    pageContext.setAttribute("toSearch",toSearch);
+    %>
+    
+	<c:if test="${toSearch}">
+	<sql:query dataSource = "${snapshot}" var = "result">
+	SELECT * FROM mydata.post WHERE subject LIKE '%<%=searchString%>%' OR body LIKE '%<%=searchString%>%'ORDER BY likes DESC   </sql:query>
+	
+	<c:choose>
+        <c:when test="${result.rowCount == 0}">
+            No results found, try again! 
+        </c:when>
+        <c:otherwise>
+    
+	<table>
+   	<tr>
+      <th>author</th>
+      <th>subject</th>
+      <th>post</th>
+      <th>date</th>
+      <th>likes</th>
+   </tr>
+   <c:forEach var = "row" items = "${result.rows}">
+   <tr>   
+       <td><c:out value = "${row.author}"/> </td>
+       <td><c:out value = "${row.subject}"/></td>
+       <td><c:out value = "${row.body}"/></td>
+       <td><c:out value = "${row.createdDate}"/></td>
+       <td><c:out value = "${row.likes}"/></td>
+   </tr>
+   </c:forEach>
+   </table>
+    </c:otherwise>
+    </c:choose>
+   </c:if>
+</div>
+   
 
 	
 

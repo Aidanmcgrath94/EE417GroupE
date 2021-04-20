@@ -1,5 +1,7 @@
 package dao;
 
+import java.util.List;
+
 import entity.Post;
 import entity.User;
 
@@ -11,5 +13,5 @@ public interface PostDao {
 
 	//Post getPost(int id); ??
 	
-	// Post searchPosts(String searchString);
+	public List<Post> searchPosts(String searchString);
 }

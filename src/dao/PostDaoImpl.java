@@ -3,6 +3,8 @@ package dao;
 import entity.Post;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * post data access object implementation
@@ -94,5 +96,70 @@ public class PostDaoImpl implements PostDao{
             }
         }
         return ret;
+	}
+
+	@Override
+	public List<Post> searchPosts(String searchString) {
+		// TODO Auto-generated method stub
+		Connection connection=null;
+        PreparedStatement preparedStatement=null;
+        Statement statement=null;
+        ResultSet resultSet=null;
+		List<Post> posts = new ArrayList<Post>();
+		
+		 try{
+        	connection=ConnectionSource.getConnection();	
+        	String sql = "SELECT * FROM post WHERE subject LIKE '%?%' OR body LIKE '%?%'";
+	 		preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1,searchString);
+            preparedStatement.setString(2,searchString);
+            preparedStatement.execute();  
+            
+            while (resultSet.next()) {
+	            Post post = new Post();
+	            post.set_id(resultSet.getInt("_id"));
+	            post.setAuthor(resultSet.getString("author"));
+	            post.setSubject(resultSet.getString("subject"));
+	            post.setBody(resultSet.getString("body"));
+	            post.setCreatedDate(resultSet.getDate("createdDate"));
+	            post.setLikes(resultSet.getInt("likes"));
+	            posts.add(post);
+	        }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try{
+                if(connection!=null) connection.close();
+                if(preparedStatement!=null) preparedStatement.close();
+                if(statement!=null) statement.close();
+                if(resultSet!=null) resultSet.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+     	return posts;
+		
+		
+/*
+		    try {
+		        connection = database.getConnection();
+		        statement = connection.prepareStatement("SELECT id, name, value FROM Biler");
+		        resultSet = statement.executeQuery();
+
+		        while (resultSet.next()) {
+		            Biler biler = new Biler();
+		            biler.setId(resultSet.getLong("id"));
+		            biler.setName(resultSet.getString("name"));
+		            biler.setValue(resultSet.getInt("value"));
+		            bilers.add(biler);
+		        }
+		    } finally {
+		        if (resultSet != null) try { resultSet.close(); } catch (SQLException ignore) {}
+		        if (statement != null) try { statement.close(); } catch (SQLException ignore) {}
+		        if (connection != null) try { connection.close(); } catch (SQLException ignore) {}
+		    }
+
+		    return bilers;
+	*/	    
 	}
 }
