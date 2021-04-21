@@ -63,7 +63,7 @@ public class processpostservlet extends HttpServlet {
         
         new_post = postDao.addPost(author,subject,body);
 
-	    request.getRequestDispatcher("posts.jsp").include(request, response);
+	    request.getRequestDispatcher("home.jsp").include(request, response);
 		
 		/*response.setContentType("text/html");
 		Connection con = null;

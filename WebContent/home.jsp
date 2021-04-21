@@ -143,6 +143,16 @@
     pageContext.setAttribute("toSearch",toSearch);
     %>
 
+	<div>
+	Enter your post here..
+   <form action="processpostservlet" method="post" name="processpost">   
+     <label>Subject : </label>   
+     <input type="text" placeholder="Enter subject.." name="subject" required>  
+     <label>Body : </label>   
+     <input type="text" placeholder="Enter body.." name="body" required>  
+     <button type="submit">Post!</button>       
+   </form><br><br>
+	</div>
 	
     <div class="container">
         <!--Navigation-->
@@ -237,7 +247,13 @@
                     <div class="username"><a href="">Username</a> <c:out value = "${row.author}"/></div>
                     <div>Role</div>
                     <img src="https://cdn.pixabay.com/photo/2015/11/06/13/27/ninja-1027877_960_720.jpg" alt="">
-                    <div>Posts: <u>45</u></div>
+                    <div>Posts: <u>
+                    <sql:query dataSource = "${snapshot}" var = "result3">
+					SELECT COUNT(author) AS author FROM mydata.post WHERE author = "${row.author}"</sql:query>
+					<c:forEach var = "row3" items = "${result3.rows}">
+                    	<c:out value = "${row3.author}"/>
+                    </c:forEach>
+                    </u></div>
                     <div>Points: <u>4586</u></div>
                 </div>
                 <div class="content">
@@ -291,7 +307,9 @@
                     <div class="username"><a href="">AnotherUser</a></div>
                     <div>Role</div>
                     <img src="https://cdn.pixabay.com/photo/2015/11/06/13/27/ninja-1027877_960_720.jpg" alt="">
-                    <div>Posts: <u>455</u></div>
+                    <div>Posts: <u>
+                    100
+                    </u></div>
                     <div>Points: <u>4586</u></div>
                 </div>
                 <div class="content">
