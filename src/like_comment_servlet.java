@@ -64,7 +64,7 @@ public class like_comment_servlet extends HttpServlet {
 			commentDao.addComment(post_id, author, comment);
 		}
 		
-		request.getRequestDispatcher("posts.jsp").include(request, response);
+		request.getRequestDispatcher("home.jsp").include(request, response);
 		
 		/*
 		response.setContentType("text/html");
