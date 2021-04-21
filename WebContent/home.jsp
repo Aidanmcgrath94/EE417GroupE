@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/jsp; charset=ISO-8859-1"
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     
 <%@ page import = "java.io.*,java.util.*,java.sql.*"%>
@@ -8,8 +8,8 @@
     
 <%@ page import="entity.User" %>
 
-<!DOCTYPE jsp>
-<jsp lang="en">
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -117,14 +117,32 @@
                 <option value="Titles">Titles</option>
                 <option value="Descriptions">Descriptions</option>
             </select>
-            <input type="text" name="q" placeholder="search ...">
-            <button><i class="fa fa-search"></i></button>
+            <!--  
+            <form action="home.jsp" method="post" name="searchpost" placeholder="search ...">     
+     			<input type="text" placeholder="search.." >   
+    	 		<button type="submit"><i class="fa fa-search"></button>       
+  	 		</form>
+  	 		-->
+  	 		<form action="home.jsp">
+            <input type="text" placeholder="search ..." name="search" required>
+            <button type="submit"><i class="fa fa-search"></i></button>
+            </form>
         </div>
     </div>
     </header>
 
+	<%
+    String searchString = "";
+    if(request.getParameter("search") != null){
+    	searchString = request.getParameter("search");
+    }
+    boolean toSearch = false;
+    if(!searchString.equals("")){
+    	toSearch = true;
+    }
+    pageContext.setAttribute("toSearch",toSearch);
+    %>
 
-	<!--  Start here -->
 	
     <div class="container">
         <!--Navigation-->
@@ -133,6 +151,73 @@
         </div>
 
         <!--Topic Section-->
+        <c:choose>
+  		<c:when test="${toSearch}">
+  		<sql:query dataSource = "${snapshot}" var = "result">
+	SELECT * FROM mydata.post WHERE subject LIKE '%<%=searchString%>%' OR body LIKE '%<%=searchString%>%'ORDER BY likes DESC   </sql:query>
+	
+			<c:choose>
+	        <c:when test="${result.rowCount == 0}">
+	            No results found, try again! 
+	        </c:when>
+	        <c:otherwise>
+	        	<!--Original thread-->
+	        Results Found: <c:out value = "${result.rowCount}"/>
+            <c:forEach var = "row" items = "${result.rows}">
+            <form action = "like_comment_servlet" method="post">
+    		<input type='hidden' name='post_id' value="${row._id}">    
+    		<input type='hidden' name='user_id' value= "<%=user_id%>">
+            <div class="head">
+            
+                <div class="authors">Author: <c:out value = "${row.author}"/></div>
+                <div class="content">Topic: <c:out value = "${row.subject}"/></div>
+            
+            </div>
+            <div class="body">
+                <div class="authors">
+                    <div class="username"><a href="">Username</a> <c:out value = "${row.author}"/></div>
+                    <div>Role</div>
+                    <img src="https://cdn.pixabay.com/photo/2015/11/06/13/27/ninja-1027877_960_720.jpg" alt="">
+                    <div>Posts: <u>45</u></div>
+                    <div>Points: <u>4586</u></div>
+                </div>
+                <div class="content">
+                    <c:out value = "${row.body}"/>
+                    <br>
+                    Posted on: <c:out value = "${row.createdDate}"/>
+                    <br>
+                    Likes: <c:out value = "${row.likes}"/>
+                    <sql:query dataSource = "${snapshot}" var = "result2">
+					SELECT * FROM mydata.comments where post_id = ${row._id}</sql:query>
+					
+                    <div class="comment">
+                    	<input type="submit" name="action" value="like">
+                    	<input type="text" name="user_comment" placeholder="comment..">
+                    	<input type="submit" name="action" value="comment">
+                        <button onclick="showComment()">Comment</button>
+                        <br><br>Comments.. <br>
+                        
+                        <table >    				
+                        <c:forEach var = "row2" items = "${result2.rows}">
+           				<tr style="padding: 20px;" >
+           				
+          				<td style="padding: 10px;"><c:out value = "${row2.author}"/></td>
+          				<td style="padding: 10px;"><c:out value = "${row2.createdDate}"/></td>
+          				<td style="padding: 10px;"><c:out value = "${row2.comment}"/></td>
+          				</tr>
+                        </c:forEach>
+                        </table>
+                    </div>
+                    
+                </div>
+            </div>
+            </form>
+        	</c:forEach>
+	        
+	        </c:otherwise>
+        	</c:choose>
+  		</c:when>
+  		<c:otherwise>
         <sql:query dataSource = "${snapshot}" var = "result">
 		SELECT * FROM mydata.post ORDER BY likes DESC   </sql:query>
 		
@@ -186,11 +271,14 @@
                 </div>
             </div>
             </form>
-        	</c:forEach>          
+        	</c:forEach>  
+        	</c:otherwise>
+        	</c:choose>        
         </div>
         
 
         <!--Comment Area-->
+        
         <div class="comment-area hide" id="comment-area">
             <textarea name="comment" placeholder="comment here ... "></textarea>
             <input type="submit" value="submit">
