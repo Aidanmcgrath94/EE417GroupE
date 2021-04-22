@@ -5,6 +5,7 @@
 <%@ page import = "javax.servlet.http.*,javax.servlet.*" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix = "c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix = "sql"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
     
 <%@ page import="entity.User" %>
 
@@ -112,11 +113,7 @@
     <!--SearchBox Section-->
     <div class="search-box">
         <div>
-            <select>
-                <option value="Everything">Everything</option>
-                <option value="Titles">Titles</option>
-                <option value="Descriptions">Descriptions</option>
-            </select>
+            
             <!--  
             <form action="home.jsp" method="post" name="searchpost" placeholder="search ...">     
      			<input type="text" placeholder="search.." >   
@@ -124,6 +121,11 @@
   	 		</form>
   	 		-->
   	 		<form action="home.jsp">
+  	 		<select name="area">
+                <option value="Everything">Everything</option>
+                <option value="Titles">Subject</option>
+                <option value="Descriptions">Body</option>
+            </select>
             <input type="text" placeholder="search ..." name="search" required>
             <button type="submit"><i class="fa fa-search"></i></button>
             </form>
@@ -132,14 +134,32 @@
     </header>
 
 	<%
+	String area = "";
+	String area1 = "";
+	String area2 = "";
     String searchString = "";
     if(request.getParameter("search") != null){
+    	area = request.getParameter("area");
+    	if(area.equals("Subject")){
+    		area1 = "subject";
+    		area2 = "subject";
+    	}
+    	else if(area.equals("Body")){
+    		area1 = "body";
+    		area2 = "body";
+    	}
+    	else{
+    		area1 = "subject";
+    		area2 = "body";
+    	}
     	searchString = request.getParameter("search");
+
     }
     boolean toSearch = false;
     if(!searchString.equals("")){
     	toSearch = true;
     }
+    //pageContext.setAttribute("area",area);
     pageContext.setAttribute("toSearch",toSearch);
     %>
 
@@ -164,7 +184,7 @@
         <c:choose>
   		<c:when test="${toSearch}">
   		<sql:query dataSource = "${snapshot}" var = "result">
-	SELECT * FROM mydata.post WHERE subject LIKE '%<%=searchString%>%' OR body LIKE '%<%=searchString%>%'ORDER BY likes DESC   </sql:query>
+	SELECT * FROM mydata.post WHERE <%=area1%> LIKE '%<%=searchString%>%' OR <%=area2 %> LIKE '%<%=searchString%>%'ORDER BY likes DESC   </sql:query>
 	
 			<c:choose>
 	        <c:when test="${result.rowCount == 0}">
@@ -172,6 +192,7 @@
 	        </c:when>
 	        <c:otherwise>
 	        	<!--Original thread-->
+	        Searched in <c:out value="<%=area %>"></c:out><br>	
 	        Results Found: <c:out value = "${result.rowCount}"/>
             <c:forEach var = "row" items = "${result.rows}">
             <form action = "like_comment_servlet" method="post">
@@ -180,7 +201,10 @@
             <div class="head">
             
                 <div class="authors">Author: <c:out value = "${row.author}"/></div>
-                <div class="content">Topic: <c:out value = "${row.subject}"/></div>
+                <c:set var = "string" value = "${row.subject}"/>
+                <c:set var = "searchString" value = "<%=searchString%>"/>
+                <c:set var = "searchString2" value ="(<u>${searchString })</u>" />
+                <div class="content">Topic: <c:out value = "${fn:replace(row.subject,searchString, searchString2)}" escapeXml="false"/></div>
             
             </div>
             <div class="body">
@@ -192,6 +216,10 @@
                     <div>Points: <u>4586</u></div>
                 </div>
                 <div class="content">
+                	<c:set var = "string" value = "${row.body}"/>
+                <c:set var = "searchString" value = "<%=searchString%>"/>
+                <c:set var = "searchString2" value ="(<u>${searchString })</u>" />
+                <div class="content">Topic: <c:out value = "${fn:replace(row.body,searchString, searchString2)}" escapeXml="false"/></div>
                     <c:out value = "${row.body}"/>
                     <br>
                     Posted on: <c:out value = "${row.createdDate}"/>
