@@ -9,17 +9,23 @@
 <body>
 
 <!-- Style as you wish -->
+<div class="container">
+    <form action="loginservlet" method="post" name="loginform">
+        <h1>Login to NerdStack</h1>
+        <div class="form-group">
+        <label>Username : </label>
+        <input type="text" placeholder="Enter Username" class="form-control" name="name" required>
+        </div>
+        <div class="form-group">
+        <label>Password : </label>
+        <input type="password" placeholder="Enter Password" class="form-control" name="password" required>
+        </div>
+        <button class="btn" type="submit">Login</button>
+    </form><br><br>
 
-<form action="loginservlet" method="post" name="loginform">   
-  <label>Username : </label>   
-  <input type="text" placeholder="Enter Username" name="name" required>  
-  <label>Password : </label>   
-  <input type="password" placeholder="Enter Password" name="password" required>  
-  <button type="submit">Login</button>       
-</form><br><br>
-
-To sign up click here...<br>
-<a href="signup.jsp">Sign Up</a><br>
+    To sign up click here...<br>
+    <a class="Signup" href="signup.jsp">Sign Up</a><br>
+</div>
 
 </body>
 </html>
