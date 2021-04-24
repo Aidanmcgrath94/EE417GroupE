@@ -413,4 +413,5 @@
     <script src="js/jquery-3.5.1.js"></script>
     <script src="js/navigation.js"></script>
     <script src="js/popup.js"></script>
+    <script src="js/common.js"></script>
 </body>

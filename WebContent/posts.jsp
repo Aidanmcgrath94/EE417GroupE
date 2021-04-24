@@ -36,7 +36,7 @@
      <input type="text" placeholder="Enter subject.." name="subject" required>  
      <label>Body : </label>   
      <input type="text" placeholder="Enter body.." name="body" required>  
-     <button type="submit">Post!</button>       
+     <button type="submit" onclick="playSound('post')">Post!</button>
    </form><br><br>
    
    <!-- for displaying posts
@@ -102,7 +102,7 @@ SELECT * FROM mydata.comments where post_id = ${row._id}</sql:query>
 	Search here..
 	<form action="posts.jsp" method="post" name="searchpost">     
      <input type="text" placeholder="search.." name="search" required>   
-     <button type="submit">Search</button>       
+     <button type="submit"">Search</button>
    </form><br><br>
    
    <%
@@ -364,6 +364,8 @@ SELECT * FROM mydata.comments where post_id = ${row._id}</sql:query>
 
     <script src="js/jquery-3.5.1.js"></script>
     <script src="js/navigation.js"></script>
+    <script src="js/common.js"></script>
+
 
 
 </body>

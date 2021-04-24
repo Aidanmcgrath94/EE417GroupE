@@ -15,6 +15,8 @@ var oldUrl = document.referrer;
 if(oldUrl.includes("signup")){
     playSound('success')
     showPopUp();
+}else if(oldUrl.includes("login")){
+    playSound('login')
 }
 
 //close when click outside of the box
