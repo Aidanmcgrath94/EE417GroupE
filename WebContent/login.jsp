@@ -10,9 +10,15 @@
 </head>
 <body>
 
+<%
+    String path = request.getContextPath();
+    String pathServlet = path + "/loginservlet";
+%>
+
+
 <!-- Style as you wish -->
 <div class="container">
-    <form action="loginservlet" method="post" name="loginform">
+    <form action="<%=pathServlet%>" method="post" name="loginform">
         <h1>Login to NerdStack</h1>
         <div class="form-group">
         <label>Username : </label>
