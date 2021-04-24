@@ -19,7 +19,7 @@
     <title>NS - Home</title>
     <link rel="stylesheet" href="CSS/home.css">
     <link rel="stylesheet" href="CSS/navigation.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://kit.fontawesome.com/0006047be0.js" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:ital@1&display=swap" rel="stylesheet">
 
@@ -393,7 +393,7 @@
     <div id="popupBox" class="popup">
         <div class="popup-content">
             <div class="popup-header">
-                <span class="close">&times;</span>
+                <span class="close" onclick="closePopUp()">&times;</span>
                 <h2>&#11088; Success &#11088;</h2>
             </div>
             <div class="popup-body">
@@ -404,11 +404,12 @@
         </div>
     </div>
 
-    </div>
+
         <footer>
             <span>&copy; NerdStack Group</span>
         </footer>
 
     <script src="js/jquery-3.5.1.js"></script>
     <script src="js/navigation.js"></script>
+    <script src="js/popup.js"></script>
 </body>
