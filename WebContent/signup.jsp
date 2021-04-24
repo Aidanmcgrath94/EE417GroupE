@@ -5,7 +5,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Sign Up</title>
-<link rel="stylesheet" href="Signup.css">
+<link rel="stylesheet" href="css/Signup.css">
 </head>
 <body>
 
