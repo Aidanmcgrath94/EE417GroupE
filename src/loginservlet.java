@@ -45,27 +45,34 @@ public class loginservlet extends HttpServlet {
 		
 		UserDao userDao=new UserDaoImpl();
 		User new_user;
+		HttpSession session = request.getSession();
 		if(userDao.usernameExist(username) == true) {
 			if(userDao.verifyUsername(username,password) != null) {
 				new_user = userDao.verifyUsername(username,password);
-				HttpSession session = request.getSession();
+				
 				
 				//Add the user to the sessions
 				session.setAttribute("theUser", new_user);
+				session.setAttribute("login_failed", false);
 				// Set session expiry time
 				session.setMaxInactiveInterval(600);
 				request.getRequestDispatcher("home.jsp").include(request, response);
 			}
 			else {	// Login unsuccessful
 		    	// Display index.jsp with appropriate message
+				session.setAttribute("login_failed", true);
+				// Set session expiry time
+				session.setMaxInactiveInterval(2);
 				request.getRequestDispatcher("login.jsp").include(request, response);
-				out.print("Sorry, password is incorrect! Try again");
 		     }
 		}
 		else {	// Login unsuccessful
-	    	// Display index.jsp with appropriate message
+	    	
+			session.setAttribute("login_failed", true);
+			// Set session expiry time
+			session.setMaxInactiveInterval(2);
 			request.getRequestDispatcher("login.jsp").include(request, response);
-			out.print("Sorry, username does not exist! Try again");
+			
 	     }
 		/*response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
