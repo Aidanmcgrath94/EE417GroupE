@@ -354,8 +354,7 @@ SELECT * FROM mydata.comments where post_id = ${row._id}</sql:query>
                 class="fa fa-share-square"></i></a><br>
         <span><i class="fa fa-rocket"></i>&nbsp; High Engagement Topic</span>&nbsp;&nbsp;&nbsp;<a href=""><i
                 class="fa fa-share-square"></i></a><br>
-        <span><i class="fa fa-lock"></i>&nbsp; Closed Topic</span>&nbsp;&nbsp;&nbsp;<a href=""><i
-                class="fa fa-share-square"></i></a><br>
+        
     </div>
 
     <footer>
