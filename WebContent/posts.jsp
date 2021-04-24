@@ -23,6 +23,134 @@
 </head>
 
 <body>
+<sql:setDataSource var = "snapshot" driver = "com.mysql.jdbc.Driver"
+         url = "jdbc:mysql://localhost:3306"
+         user = "root"  password = "test"/>
+    Add a post here<br>
+    <!-- Form for user to add a post
+    Place and style as you wish -->
+   
+   Enter your post here..
+   <form action="processpostservlet" method="post" name="processpost">   
+     <label>Subject : </label>   
+     <input type="text" placeholder="Enter subject.." name="subject" required>  
+     <label>Body : </label>   
+     <input type="text" placeholder="Enter body.." name="body" required>  
+     <button type="submit" onclick="playSound('post')">Post!</button>
+   </form><br><br>
+   
+   <!-- for displaying posts
+    Place and style as you wish-->
+    
+   <%
+    User newUser;
+    int user_id = -1;
+    if((User)session.getAttribute("theUser") != null){
+      newUser = (User)session.getAttribute("theUser");
+	  user_id = newUser.get_id();
+    }
+   %> 
+   
+ 
+    <sql:query dataSource = "${snapshot}" var = "result">
+SELECT * FROM mydata.post ORDER BY likes DESC   </sql:query>
+
+<table>
+   <tr>
+      <th>author</th>
+      <th>subject</th>
+      <th>post</th>
+      <th>date</th>
+      <th>likes</th>
+   </tr>
+    <c:forEach var = "row" items = "${result.rows}">
+    <form action = "like_comment_servlet" method="post">
+    <input type='hidden' name='post_id' value="${row._id}">    
+    <input type='hidden' name='user_id' value= "<%=user_id%>">
+   <tr>   
+       <td><c:out value = "${row.author}"/> </td>
+       <td><c:out value = "${row.subject}"/></td>
+       <td><c:out value = "${row.body}"/></td>
+       <td><c:out value = "${row.createdDate}"/></td>
+       <td><c:out value = "${row.likes}"/></td>
+       <td> <input type="submit" name="action" value="like"></td> 
+       <td><input type="text" name="user_comment" placeholder="comment.."></td>
+       <td> <input type="submit" name="action" value="comment"></td>      
+    </tr>
+    </form>
+    <sql:query dataSource = "${snapshot}" var = "result2">
+SELECT * FROM mydata.comments where post_id = ${row._id}</sql:query>
+		<table>
+		<tr>
+      	<th>Post ID</th>
+	    <th>Author</th>
+	    <th>Comment</th>
+   		</tr>
+        <c:forEach var = "row" items = "${result2.rows}">
+        <tr>   
+         <td><c:out value = "${row.post_id}"/> </td>
+         <td><c:out value = "${row.author}"/></td>
+         <td><c:out value = "${row.comment}"/></td>
+         </tr>
+        </c:forEach>
+        </table>
+    
+   </c:forEach>
+</table>
+
+<div style="margin:100px; padding:100px;">
+	Search here..
+	<form action="posts.jsp" method="post" name="searchpost">     
+     <input type="text" placeholder="search.." name="search" required>   
+     <button type="submit"">Search</button>
+   </form><br><br>
+   
+   <%
+    String searchString = "";
+    if(request.getParameter("search") != null){
+    	searchString = request.getParameter("search");
+    }
+    boolean toSearch = false;
+    if(!searchString.equals("")){
+    	toSearch = true;
+    }
+    pageContext.setAttribute("toSearch",toSearch);
+    %>
+    
+	<c:if test="${toSearch}">
+	<sql:query dataSource = "${snapshot}" var = "result">
+	SELECT * FROM mydata.post WHERE subject LIKE '%<%=searchString%>%' OR body LIKE '%<%=searchString%>%'ORDER BY likes DESC   </sql:query>
+	
+	<c:choose>
+        <c:when test="${result.rowCount == 0}">
+            No results found, try again! 
+        </c:when>
+        <c:otherwise>
+    
+	<table>
+   	<tr>
+      <th>author</th>
+      <th>subject</th>
+      <th>post</th>
+      <th>date</th>
+      <th>likes</th>
+   </tr>
+   <c:forEach var = "row" items = "${result.rows}">
+   <tr>   
+       <td><c:out value = "${row.author}"/> </td>
+       <td><c:out value = "${row.subject}"/></td>
+       <td><c:out value = "${row.body}"/></td>
+       <td><c:out value = "${row.createdDate}"/></td>
+       <td><c:out value = "${row.likes}"/></td>
+   </tr>
+   </c:forEach>
+   </table>
+    </c:otherwise>
+    </c:choose>
+   </c:if>
+</div>
+   
+
 	
 
     <header>
@@ -226,8 +354,7 @@
                 class="fa fa-share-square"></i></a><br>
         <span><i class="fa fa-rocket"></i>&nbsp; High Engagement Topic</span>&nbsp;&nbsp;&nbsp;<a href=""><i
                 class="fa fa-share-square"></i></a><br>
-        <span><i class="fa fa-lock"></i>&nbsp; Closed Topic</span>&nbsp;&nbsp;&nbsp;<a href=""><i
-                class="fa fa-share-square"></i></a><br>
+        
     </div>
 
     <footer>
@@ -236,6 +363,8 @@
 
     <script src="js/jquery-3.5.1.js"></script>
     <script src="js/navigation.js"></script>
+    <script src="js/common.js"></script>
+
 
 
 </body>
