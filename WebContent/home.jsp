@@ -389,6 +389,21 @@
             <input type="submit" value="submit">
         </div>
 
+    <!-- Pop Up Box -->
+    <div id="popupBox" class="popup">
+        <div class="popup-content">
+            <div class="popup-header">
+                <span class="close">&times;</span>
+                <h2>&#11088; Success &#11088;</h2>
+            </div>
+            <div class="popup-body">
+                <br>
+                <p>You are now registered <strong>Nerdstack</strong> !</p>
+                <br>
+            </div>
+        </div>
+    </div>
+
     </div>
         <footer>
             <span>&copy; NerdStack Group</span>
