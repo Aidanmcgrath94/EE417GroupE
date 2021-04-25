@@ -12,7 +12,6 @@ var slideMenu = (function() {
     };
 
 
-    // public interface
     slideMenu.prototype = {
         constructor: slideMenu,
         init: function() {
@@ -25,7 +24,6 @@ var slideMenu = (function() {
     };
 
 
-    // private interface
     function openBtnClicked(slideNav, evt) {
         if (!this.slideNav.hasClass('open')) {
             this.slideNav.addClass('open');
