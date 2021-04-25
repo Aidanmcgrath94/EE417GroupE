@@ -3,8 +3,8 @@ var slideMenu = (function() {
 
     var slideMenu = function(config) {
         config = config || {};
-        this.toggleBtn = $(config.toggleBtn);
-        this.menu = $(config.menu);
+        this.menuBtn = $(config.menuBtn);
+        this.slideNav = $(config.slideNav);
         this.close = $(config.close);
 
         this.init();
@@ -19,31 +19,22 @@ var slideMenu = (function() {
             this.eventManager();
         },
         eventManager: function() {
-            this.toggleBtn.on('click.openMenu', onButtonClickHandler.bind(this));
-            this.close.on('click.closeMenu', onCloseClickHandler.bind(this));
+            this.menuBtn.on('click.openMenu', openBtnClicked.bind(this));
+            this.close.on('click.closeMenu', closeBtnClicked.bind(this));
         }
     };
 
 
     // private interface
-    function onButtonClickHandler(menu, evt) {
-        if (!this.menu.hasClass('open')) {
-            this.menu.addClass('open');
+    function openBtnClicked(slideNav, evt) {
+        if (!this.slideNav.hasClass('open')) {
+            this.slideNav.addClass('open');
         };
     }
 
 
-    function onCloseClickHandler(evt) {
-        this.menu.removeClass('open')
-    }
-
-
-    function onDocumentClickHandler(evt) {
-        var $target = $(evt.target);
-
-        if (!$target.closest(this.menuForm).length && !$target.closest(this.menuContent).length && this.menu.hasClass('open')) {
-            this.menu.removeClass('open')
-        }
+    function closeBtnClicked(evt) {
+        this.slideNav.removeClass('open')
     }
 
 
@@ -53,8 +44,8 @@ var slideMenu = (function() {
 
 $(document).ready(function() {
     var mainMenu = new slideMenu({
-        menu: '.slideNav',
-        toggleBtn: '.menuBtn',
+        slideNav: '.slideNav',
+        menuBtn: '.menuBtn',
         close: '.closeBtn'
     });
 });
