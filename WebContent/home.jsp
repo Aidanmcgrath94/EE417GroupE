@@ -138,7 +138,7 @@
       %>    
       
     <header>
-	<!--
+	<!-- 
     <div class="slideNav">
 
         <div class="menuFold">
@@ -161,9 +161,9 @@
             </ul>
 
             <a href="#" class="closeBtn"><i class="fa fa-close"></i>&nbsp; Close menu</a>
--->
-            <!--<div style="height: 250px"></div>-->
-   <!--  
+            
+            
+    
             <a href="#"><i id="switchButton" class="fa fa-gg-circle"></i></a>
 
             <a href="#"><i id="accountButton" class="fa fa-user-circle"></i></a>

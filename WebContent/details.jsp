@@ -35,11 +35,11 @@
                 </div>
 
                 <ul class="menuNav">
-                    <li><a href="home.html" class="orange"><i class="fa fa-home fa-fw"></i>&nbsp; Home</a></li>
-                    <li><a href="posts.html" class="yellow"><i class="fa fa-newspaper-o fa-fw"></i>&nbsp; Posts</a></li>
-                    <li><a href="posts.html" class="green"><i class="fa fa-comments-o fa-fw"></i>&nbsp; Forum</a></li>
-                    <li><a href="details.html" class="purple"><i class="fa fa-envelope fa-fw"></i>&nbsp; Contact</a></li>
-                    <li><a href="details.html" class="red"><i class="fa fa-users fa-fw"></i>&nbsp; About</a></li>
+                    <li><a href="home.jsp" class="orange"><i class="fa fa-home fa-fw"></i>&nbsp; Home</a></li>
+                    <li><a href="posts.jsp" class="yellow"><i class="fa fa-newspaper-o fa-fw"></i>&nbsp; Posts</a></li>
+                    <li><a href="posts.jsp" class="green"><i class="fa fa-comments-o fa-fw"></i>&nbsp; Forum</a></li>
+                    <li><a href="details.jsp" class="purple"><i class="fa fa-envelope fa-fw"></i>&nbsp; Contact</a></li>
+                    <li><a href="details.jsp" class="red"><i class="fa fa-users fa-fw"></i>&nbsp; About</a></li>
                 </ul>
 
                 <a href="#" class="closeBtn"><i class="fa fa-close"></i>&nbsp; Close menu</a>
