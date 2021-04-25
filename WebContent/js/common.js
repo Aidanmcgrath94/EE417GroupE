@@ -9,22 +9,22 @@ function playSound(type){
 
     switch(type){
         case "post":
-            soundUrl = "sounds/almighty_push.mp3";
+            soundUrl = "../sounds/almighty_push.mp3";
             break;
         case "success":
-            soundUrl = "sounds/success.mp3";
+            soundUrl = "../sounds/success.mp3";
             break;
         case "comment":
-            soundUrl = "sounds/chakra.mp3";
+            soundUrl = "../sounds/chakra.mp3";
             break;
         case "like":
-            soundUrl = "sounds/handsign.mp3";
+            soundUrl = "../sounds/handsign.mp3";
             break;
         case "login":
-            soundUrl = "sounds/know_pain.mp3";
+            soundUrl = "../sounds/know_pain.mp3";
             break;
         case "logout":
-            soundUrl = "sounds/sharingan.mp3";
+            soundUrl = "../sounds/sharingan.mp3";
             break;
         default:
             console.log('wrong sound type')
