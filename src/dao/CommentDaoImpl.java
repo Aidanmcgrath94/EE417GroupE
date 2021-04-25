@@ -64,4 +64,31 @@ public class CommentDaoImpl implements CommentDao{
 		return comment;
 	}
 
+	@Override
+	public void clearComments() {
+		// TODO Auto-generated method stub
+		Connection connection=null;
+        PreparedStatement preparedStatement=null;
+        Statement statement=null;
+        ResultSet resultSet=null;
+        try{
+            connection=ConnectionSource.getConnection();
+            String sql="TRUNCATE TABLE comments";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+        } finally {
+            try{
+                if(connection!=null) connection.close();
+                if(preparedStatement!=null) preparedStatement.close();
+                if(statement!=null) statement.close();
+                if(resultSet!=null) resultSet.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+	}
+
 }

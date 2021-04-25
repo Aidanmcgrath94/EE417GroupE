@@ -58,89 +58,18 @@ public class processpostservlet extends HttpServlet {
 	    	author = newUser.getUsername();
 	    }
 	    
+	    String sort_by = "";
+	    if((String)session.getAttribute("sort_by") != null){
+	    	sort_by = (String) session.getAttribute("sort_by");
+	    }
+	    System.out.println(sort_by);
+	    
 	    PostDao postDao=new PostDaoImpl();
         Post new_post;
         
         new_post = postDao.addPost(author,subject,body);
 
 	    request.getRequestDispatcher("home.jsp").include(request, response);
-		
-		/*response.setContentType("text/html");
-		Connection con = null;
-        Statement stmt = null;
-        ResultSet rs = null;
-        
-        
-         
-        String JDBCUrl = "jdbc:mysql://localhost:3306";
-        String username = "root";
-        String password = "test";
-        PrintWriter out = response.getWriter();
-        try {
-            System.out.println("\nConnecting to the SSD Database......");
-            Class.forName("com.mysql.jdbc.Driver");
-            con = DriverManager.getConnection(JDBCUrl, username, password);
-        }
-        catch (Exception e) {
-            System.out.println("\nAn error has occurred during the connection phase!  This is most likely due to your CLASSPATH being set wrong and the"
-                    + "  classes unable to be found.  Otherwise the database itself may be down.  Try telneting to port 3306 and see if it is up!");
-            e.printStackTrace();
-            System.exit(0);
-        }   
-		
-        // Get parameters from form
-        String subject=request.getParameter("subject");
-        String body=request.getParameter("body");
-        
-        System.out.println(subject+body);
-        
-        try {
-		     System.out.println("\nConnection Successful..... creating statement....");
-	     	     stmt = con.createStatement();
-	     	     
-	     	     // Create a prepared statement for insert
-	     	    PreparedStatement pstmt = con.prepareStatement("INSERT INTO mydata.posts(Post_id, author, subject, body, likes) VALUES (?,?,?,?, ?)");
-				  pstmt.clearParameters();       // Clears any previous parameters
-				  // Add values
-				  int post_id = (int)(Math.random() * 1000000);
-				  pstmt.setInt(1, post_id);
-				  
-				  HttpSession session=request.getSession(false);
-				  User newUser;
-				  String author = "";
-			      if((User)session.getAttribute("theUser") != null){
-			    	  newUser = (User)session.getAttribute("theUser");
-			    	  author = newUser.getUsername();
-			      }
-				  
-			      pstmt.setInt(1, post_id);
-				  pstmt.setString(2, author);
-				  pstmt.setString(3, subject);
-				  pstmt.setString(4, body);
-				  pstmt.setInt(5, 0);
-				  // Execute the insert
-				  pstmt.executeUpdate();
-
-				request.getRequestDispatcher("posts.jsp").include(request, response);
-       }
-       catch (SQLException e) {
-       	System.out.println("\nAn error has occurred during the Statement/ResultSet phase.  Please check the syntax and study the Exception details!");
-           while (e != null) {
-           	System.out.println(e.getMessage());
-               e = e.getNextException();
-           }
-           System.exit(0);
-       }finally {
-          	 try {    
-          	     if (rs != null) rs.close();
-          		 if (stmt != null) stmt.close();
-          		 if (con != null) con.close();
-          	  }
-          	  catch (Exception ex) {
-          	  System.out.println("An error occurred while closing down connection/statement"); 
-             }
-       
-        }*/
         
 	}
 

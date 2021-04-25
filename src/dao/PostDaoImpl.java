@@ -137,29 +137,35 @@ public class PostDaoImpl implements PostDao{
                 e.printStackTrace();
             }
         }
-     	return posts;
-		
-		
-/*
-		    try {
-		        connection = database.getConnection();
-		        statement = connection.prepareStatement("SELECT id, name, value FROM Biler");
-		        resultSet = statement.executeQuery();
+     	return posts;    
+	}
 
-		        while (resultSet.next()) {
-		            Biler biler = new Biler();
-		            biler.setId(resultSet.getLong("id"));
-		            biler.setName(resultSet.getString("name"));
-		            biler.setValue(resultSet.getInt("value"));
-		            bilers.add(biler);
-		        }
-		    } finally {
-		        if (resultSet != null) try { resultSet.close(); } catch (SQLException ignore) {}
-		        if (statement != null) try { statement.close(); } catch (SQLException ignore) {}
-		        if (connection != null) try { connection.close(); } catch (SQLException ignore) {}
-		    }
+	@Override
+	public void clearPosts() {
+		// TODO Auto-generated method stub
+		Connection connection=null;
+        PreparedStatement preparedStatement=null;
+        Statement statement=null;
+        ResultSet resultSet=null;
+        try{
+        	
+            connection=ConnectionSource.getConnection();
+            String sql="TRUNCATE TABLE post";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
 
-		    return bilers;
-	*/	    
+        } finally {
+            try{
+                if(connection!=null) connection.close();
+                if(preparedStatement!=null) preparedStatement.close();
+                if(statement!=null) statement.close();
+                if(resultSet!=null) resultSet.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+	
 	}
 }

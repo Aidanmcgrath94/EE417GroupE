@@ -6,6 +6,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix = "c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix = "sql"%>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
+<%@ page import = "java.util.Date" %>
+<%@ page import = "java.text.DateFormat" %>
+<%@ page import = "java.text.SimpleDateFormat" %>
     
 <%@ page import="entity.User" %>
 
@@ -38,44 +41,104 @@
 	You could create different colour schem based on fvourite... -->
     <div>
       <% 
+ 
       User newUser;
-			
 	int user_id = -1;
+	String firstname ="";
+	String lastname = "";
+	String username = "";
+	String email="";
+	String strDate="";
+	Date dateCreated = new Date();
+	boolean isAdmin = false;
    
       if((User)session.getAttribute("theUser") != null){
     	  // Get firstname attribute
     	  newUser = (User)session.getAttribute("theUser");
     	  user_id = newUser.get_id();
-    	  out.print("<h1>Welcome, " + newUser.getFirstName() + ": here are your details</h1><br>");
-    	  out.print("First name: " +  newUser.getFirstName() + "<br>");
-    	  out.print("Last name: " +  newUser.getLastName() + "<br>");
-    	  out.print("Username: " +  newUser.getUsername() + "<br>");
-    	  out.print("email: " +  newUser.getEmail() + "<br>");
-    	  //out.print("Favourite: " +  newUser.getFavourite() + "<br><br>");
-    	  if(newUser.isAdmin() == true){
-    		  out.print("You are an admin.. here are your access priveleges<br>");
-    	  }
-    	  else{
-    		  out.print("You are just a regular user.. too bad!");
-    	  }
-      }     
-      %>
+    	  firstname = newUser.getFirstName();
+    	  lastname = newUser.getLastName();
+    	  username = newUser.getUsername();
+    	  email = newUser.getEmail();   	  
+    	  dateCreated = newUser.getCreatedDate();
+    	  isAdmin = newUser.isAdmin();
+      }
       
+	  	String area = "";
+	  	String area1 = "";
+	  	String area2 = "";
+      String searchString = "";
+      String sortBy = "";
+      String orderBy = "likes DESC";
+      int lim = 1000;
       
-      <a href="posts.jsp">Go to posts</a><br>
-    </div>	
-    
-    
-    <!-- Logout button.. style as you wish -->
-    <div>
-    <form action = "logoutservlet" method="post">
-  		<button type="submit">Click here to logout</button>
-	</form>
-    </div>
-    
-    
-    <header>
+      if(request.getParameter("sort_by") != null){
+      	sortBy = request.getParameter("sort_by");
+      	if(sortBy.equals("Likes_high")){
+      		orderBy = "likes DESC";
+      	}
+      	else if(sortBy.equals("Likes_low")){
+      		orderBy = "likes ASC";
+      	}
+      	else if(sortBy.equals("Old")){
+      		orderBy = "createdDate ASC";
+      	}
+      	else if(sortBy.equals("New")){
+      		orderBy = "createdDate DESC";
+      	}
+      	else if(sortBy.equals("Author")){
+      		orderBy = "author DESC";
+      	}
+      	
+      }
+      
+      if(request.getParameter("numberOfPosts") != null){
+    	  String numberOfPosts = request.getParameter("numberOfPosts");
+        	if(numberOfPosts.equals("five")){
+        		lim = 5;
+        	}
+        	else if(numberOfPosts.equals("ten")){
+        		lim = 10;
+        	}
+        	else if(numberOfPosts.equals("twenty")){
+        		lim = 20;
+        	}
+        	else if(sortBy.equals("all")){
+        		lim = 1000;
+        	}
 
+      }
+      
+      if(request.getParameter("search") != null){
+    	if(!request.getParameter("search").equals("")){
+      	area = request.getParameter("area");
+      	if(area.equals("Subject")){
+      		area1 = "subject";
+      		area2 = "subject";
+      	}
+      	else if(area.equals("Body")){
+      		area1 = "body";
+      		area2 = "body";
+      	}
+      	else{
+      		area1 = "subject";
+      		area2 = "body";
+      	}
+      	searchString = request.getParameter("search");
+    	}
+      }
+      boolean toSearch = false;
+      if(!searchString.equals("")){
+      	toSearch = true;
+      }
+      pageContext.setAttribute("isAdmin",isAdmin);
+      pageContext.setAttribute("orderBy",orderBy);
+      pageContext.setAttribute("toSearch",toSearch);
+      
+      %>    
+      
+    <header>
+	<!--
     <div class="slideNav">
 
         <div class="menuFold">
@@ -98,94 +161,119 @@
             </ul>
 
             <a href="#" class="closeBtn"><i class="fa fa-close"></i>&nbsp; Close menu</a>
-
-<!--            <div style="height: 250px"></div>-->
+-->
+            <!--<div style="height: 250px"></div>-->
+   <!--  
             <a href="#"><i id="switchButton" class="fa fa-gg-circle"></i></a>
 
             <a href="#"><i id="accountButton" class="fa fa-user-circle"></i></a>
 
         </div>
 
-    </div>
+    </div>-->
 
 
     <h3 id="mainTitle">NerdStack</h3>
 
+	Welcome, <c:out value="<%=firstname %>"></c:out>, here are you details:<br>
+	<table style="margin:20px;">
+	<tr style="margin:20px;">
+	<td style="padding:20px;">First name:</td><td style="padding:20px;"><c:out value="<%=firstname %>"></c:out></td>
+	</tr>
+	<tr style="margin:20px;">
+	<td style="padding:20px;">Last name:</td><td style="padding:20px;"><c:out value="<%=lastname %>"></c:out></td>
+	</tr>
+	<tr style="margin:20px;">
+	<td style="padding:20px;">Username:</td><td style="padding:20px;"><c:out value="<%=username %>"></c:out></td>
+	</tr>
+	<tr style="margin:20px;">
+	<td style="padding:20px;">email:</td><td style="padding:20px;"><c:out value="<%=email %>"></c:out></td>
+	</tr>
+	<tr style="margin:20px;">
+	<td style="padding:20px;">Date Joined:</td><td style="padding:20px;"><c:out value="<%=dateCreated %>"></c:out></td>
+	</tr>
+	
+	<tr style="margin:20px;">
+	<td style="padding:20px;">Is Admin:</td><td style="padding:20px;"><c:out value="<%=isAdmin %>"></c:out></td>
+	</tr>
+	</table>
+	
+	 <!-- Logout button.. style as you wish -->
+    <div>
+    <form action = "logoutservlet" method="post">
+  		<button type="submit">Click here to logout</button>
+	</form>
+    </div><br><br><br>
+    
+    <div>
+	Enter your post here..
+   <form action="processpostservlet" method="post" name="processpost">      
+     <input type="text" placeholder="Enter subject.." name="subject" required style="width:500px;"> <br> 
+     <input type="text" placeholder="Enter body.." name="body" required style="width:500px; height:100px;">  <br>
+     <button type="submit">Post!</button>       
+   </form>
+	</div>
+	
     <!--SearchBox Section-->
     <div class="search-box">
         <div>
-            
-            <!--  
-            <form action="home.jsp" method="post" name="searchpost" placeholder="search ...">     
-     			<input type="text" placeholder="search.." >   
-    	 		<button type="submit"><i class="fa fa-search"></button>       
-  	 		</form>
-  	 		-->
+          
   	 		<form action="home.jsp">
   	 		<select name="area">
                 <option value="Everything">Everything</option>
-                <option value="Titles">Subject</option>
-                <option value="Descriptions">Body</option>
+                <option value="Subject">Subject</option>
+                <option value="Body">Body</option>
             </select>
             <input type="text" placeholder="search ..." name="search" required>
             <button type="submit"><i class="fa fa-search"></i></button>
+            </form><br>
+            <form action="home.jsp">
+            	<button name="search" value="" type="submit">Clear Search</button>
             </form>
         </div>
     </div>
     </header>
-
-	<%
-	String area = "";
-	String area1 = "";
-	String area2 = "";
-    String searchString = "";
-    if(request.getParameter("search") != null){
-    	area = request.getParameter("area");
-    	if(area.equals("Subject")){
-    		area1 = "subject";
-    		area2 = "subject";
-    	}
-    	else if(area.equals("Body")){
-    		area1 = "body";
-    		area2 = "body";
-    	}
-    	else{
-    		area1 = "subject";
-    		area2 = "body";
-    	}
-    	searchString = request.getParameter("search");
-
-    }
-    boolean toSearch = false;
-    if(!searchString.equals("")){
-    	toSearch = true;
-    }
-    //pageContext.setAttribute("area",area);
-    pageContext.setAttribute("toSearch",toSearch);
-    %>
-
-	<div>
-	Enter your post here..
-   <form action="processpostservlet" method="post" name="processpost">   
-     <label>Subject : </label>   
-     <input type="text" placeholder="Enter subject.." name="subject" required>  
-     <label>Body : </label>   
-     <input type="text" placeholder="Enter body.." name="body" required>  
-     <button type="submit">Post!</button>       
-   </form><br><br>
-	</div>
 	
     <div class="container">
         <!--Navigation-->
         <div class="navigate">
             <span><a href="">NerdStack</a> >> <a href="">random subforum</a> >> <a href="">random topic</a></span>
         </div>
+        
+     
 
         <!--Topic Section-->
+        <form action="home.jsp">
+  	 		<label>Sort by :</label>
+     		<select name="sort_by">
+                <option value="Likes_high">Likes High-Low</option>
+                <option value="Likes_low">Likes Low-High</option>
+                <option value="Old">Oldest-Newest</option>
+                <option value="New">Newest-Oldest</option>
+                <option value="Authors">Authors</option>
+            </select><br>
+            <label>Number of posts :</label>
+            <select name="numberOfPosts">
+                <option value="five">5</option>
+                <option value="ten">10</option>
+                <option value="twenty">20</option>
+                <option value="all">All</option>
+            </select>
+            <button type="submit"><i class="fa fa-search"></i></button>
+            </form>
+        
+        <c:if test = "${isAdmin}">
+         <br><br> You have special admin priveleges <br>
+         Click here to clear all posts :<br>
+         <form action = "clearpostsservlet" method="post">
+  		<button type="submit">Clear all posts</button><br>
+		</form>
+      	</c:if>
+        
         <c:choose>
   		<c:when test="${toSearch}">
   		<sql:query dataSource = "${snapshot}" var = "result">
-	SELECT * FROM mydata.post WHERE <%=area1%> LIKE '%<%=searchString%>%' OR <%=area2 %> LIKE '%<%=searchString%>%'ORDER BY likes DESC   </sql:query>
+	SELECT * FROM mydata.post WHERE <%=area1%> LIKE '%<%=searchString%>%' OR <%=area2 %> LIKE '%<%=searchString%>%' ORDER BY <%=orderBy%>   </sql:query>
 	
 			<c:choose>
 	        <c:when test="${result.rowCount == 0}">
@@ -193,6 +281,7 @@
 	        </c:when>
 	        <c:otherwise>
 	        	<!--Original thread-->
+	        Searched For : "<c:out value="<%=searchString%>"></c:out>"	<br>
 	        Searched in <c:out value="<%=area %>"></c:out><br>	
 	        Results Found: <c:out value = "${result.rowCount}"/>
             <c:forEach var = "row" items = "${result.rows}">
@@ -211,14 +300,22 @@
             <div class="body">
                 <div class="authors">
                     <div class="username"><a href="">Username</a> <c:out value = "${row.author}"/></div>
-                    <div>Role</div>
+                    
                     <img src="https://cdn.pixabay.com/photo/2015/11/06/13/27/ninja-1027877_960_720.jpg" alt="">
-                    <div>Posts: <u>45</u></div>
-                    <div>Points: <u>4586</u></div>
+                    <div>Posts: <u>
+                    <sql:query dataSource = "${snapshot}" var = "result3">
+					SELECT COUNT(author) AS author FROM mydata.post WHERE author = "${row.author}"</sql:query>
+					<c:forEach var = "row3" items = "${result3.rows}">
+                    	<c:out value = "${row3.author}"/>
+                    </c:forEach>
+                    </u></div>
+                    
                 </div>
                 <div class="content">
                 	<c:set var = "string" value = "${row.body}"/>
                 <c:set var = "searchString" value = "<%=searchString%>"/>
+                <c:set var = "orderBy" value = "<%=orderBy%>"/>
+
                 <c:set var = "searchString2" value ="(<u>${searchString })</u>" />
                 <div class="content">Topic: <c:out value = "${fn:replace(row.body,searchString, searchString2)}" escapeXml="false"/></div>
                     <c:out value = "${row.body}"/>
@@ -258,7 +355,7 @@
   		</c:when>
   		<c:otherwise>
         <sql:query dataSource = "${snapshot}" var = "result">
-		SELECT * FROM mydata.post ORDER BY likes DESC   </sql:query>
+		SELECT * FROM mydata.post ORDER BY <%=orderBy%> LIMIT <%=lim%></sql:query>
 		
             <!--Original thread-->
             <c:forEach var = "row" items = "${result.rows}">
@@ -274,7 +371,7 @@
             <div class="body">
                 <div class="authors">
                     <div class="username"><a href="">Username</a> <c:out value = "${row.author}"/></div>
-                    <div>Role</div>
+                    
                     <img src="https://cdn.pixabay.com/photo/2015/11/06/13/27/ninja-1027877_960_720.jpg" alt="">
                     <div>Posts: <u>
                     <sql:query dataSource = "${snapshot}" var = "result3">
@@ -283,7 +380,7 @@
                     	<c:out value = "${row3.author}"/>
                     </c:forEach>
                     </u></div>
-                    <div>Points: <u>4586</u></div>
+                    
                 </div>
                 <div class="content">
                     <c:out value = "${row.body}"/>
@@ -329,12 +426,12 @@
             <input type="submit" value="submit">
         </div>
 
-        <!--Comments Section-->
+        <!--Comments Section
         <div class="comments-container">
             <div class="body">
                 <div class="authors">
                     <div class="username"><a href="">AnotherUser</a></div>
-                    <div>Role</div>
+                    
                     <img src="https://cdn.pixabay.com/photo/2015/11/06/13/27/ninja-1027877_960_720.jpg" alt="">
                     <div>Posts: <u>
                     100
@@ -353,15 +450,16 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <!--Reply Area-->
+        </div> -->
+        
+        <!--Reply Area
         <div class="comment-area hide">
             <textarea name="reply" placeholder="reply here ... "></textarea>
             <input type="submit" value="submit">
         </div>
+		-->
 
-
-        <!--Another Comment With replies-->
+        <!--Another Comment With replies
         <div class="comments-container">
             <div class="body">
                 <div class="authors">
@@ -384,11 +482,13 @@
                 </div>
             </div>
         </div>
-        <!--Reply Area-->
+        -->
+        <!--Reply Area
         <div class="comment-area hide">
             <textarea name="reply" id="" placeholder="reply here ... "></textarea>
             <input type="submit" value="submit">
         </div>
+        -->
 
     <!-- Pop Up Box -->
     <div id="popupBox" class="popup">

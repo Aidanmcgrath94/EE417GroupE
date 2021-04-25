@@ -11,7 +11,7 @@ public interface PostDao {
 	
 	public boolean incrementLikes(int post_id);
 
-	//Post getPost(int id); ??
+	public void clearPosts();
 	
 	public List<Post> searchPosts(String searchString);
 }

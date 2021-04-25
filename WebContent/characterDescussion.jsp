@@ -30,6 +30,7 @@ SELECT * FROM mydata.character  </sql:query>
        <td><input type="text" name="user_comment" placeholder="comment.."></td>
        <td> <input type="submit" name="action" value="comment"></td>      
     </tr>
+    </c:forEach>
 </table>
 </body>
 </html>

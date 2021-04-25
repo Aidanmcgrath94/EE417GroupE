@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    
+<%@ page import = "java.io.*,java.util.*,java.sql.*"%>
+<%@ page import = "javax.servlet.http.*,javax.servlet.*" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix = "c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix = "sql"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -45,6 +51,21 @@
                 <label for="pass">New Password (*): (8 chars min)</label>
                 <input type="password" name="password" minlength="8" required placeholder="new password.."><br>
             </div>
+            
+            <%		
+				boolean matched_failed = false;
+				System.out.println(matched_failed);
+				if(session.getAttribute("matched_failed") != null){
+			  	  	matched_failed = (boolean)session.getAttribute("matched_failed");
+				}
+				System.out.println(matched_failed);
+			    pageContext.setAttribute("matched_failed",matched_failed);
+			%>
+			<c:if test="${matched_failed == true}">  
+   				<p>Passwords do not match<br>
+   				Please try again!<br><br></p>
+			</c:if>
+			
             <div class="input-container name">
                 <label for="pass">Confirm Password (*): </label>
                 <input type="password" name="confirm_password" minlength="8" required placeholder="confirm password.."><br>
