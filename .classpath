@@ -7,6 +7,7 @@
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
+<<<<<<< Updated upstream
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry kind="lib" path="C:/Program Files/Apache Software Foundation/Tomcat 9.0/lib/jsp-api.jar">
@@ -55,4 +56,56 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="output" path="build/classes"/>
+=======
+<<<<<<< Updated upstream
+	<classpathentry kind="output" path="out/production/NerdStack"/>
+=======
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry kind="lib" path="C:/Users/aidan/Documents/apache-tomcat-9.0.44/apache-tomcat-9.0.44/lib/annotations-api.jar"/>
+	<classpathentry kind="lib" path="C:/Users/aidan/Documents/apache-tomcat-9.0.44/apache-tomcat-9.0.44/lib/catalina.jar"/>
+	<classpathentry kind="lib" path="C:/Users/aidan/Documents/apache-tomcat-9.0.44/apache-tomcat-9.0.44/lib/catalina-ant.jar"/>
+	<classpathentry kind="lib" path="C:/Users/aidan/Documents/apache-tomcat-9.0.44/apache-tomcat-9.0.44/lib/catalina-ha.jar"/>
+	<classpathentry kind="lib" path="C:/Users/aidan/Documents/apache-tomcat-9.0.44/apache-tomcat-9.0.44/lib/catalina-ssi.jar"/>
+	<classpathentry kind="lib" path="C:/Users/aidan/Documents/apache-tomcat-9.0.44/apache-tomcat-9.0.44/lib/catalina-storeconfig.jar"/>
+	<classpathentry kind="lib" path="C:/Users/aidan/Documents/apache-tomcat-9.0.44/apache-tomcat-9.0.44/lib/catalina-tribes.jar"/>
+	<classpathentry kind="lib" path="C:/Users/aidan/Documents/apache-tomcat-9.0.44/apache-tomcat-9.0.44/lib/ecj-4.18.jar"/>
+	<classpathentry kind="lib" path="C:/Users/aidan/Documents/apache-tomcat-9.0.44/apache-tomcat-9.0.44/lib/el-api.jar"/>
+	<classpathentry kind="lib" path="C:/Users/aidan/Documents/apache-tomcat-9.0.44/apache-tomcat-9.0.44/lib/jasper.jar"/>
+	<classpathentry kind="lib" path="C:/Users/aidan/Documents/apache-tomcat-9.0.44/apache-tomcat-9.0.44/lib/jasper-el.jar"/>
+	<classpathentry kind="lib" path="C:/Users/aidan/Documents/apache-tomcat-9.0.44/apache-tomcat-9.0.44/lib/jaspic-api.jar"/>
+	<classpathentry kind="lib" path="C:/Users/aidan/Documents/apache-tomcat-9.0.44/apache-tomcat-9.0.44/lib/jsp-api.jar"/>
+	<classpathentry kind="lib" path="C:/Users/aidan/Documents/apache-tomcat-9.0.44/apache-tomcat-9.0.44/lib/servlet-api.jar"/>
+	<classpathentry kind="lib" path="C:/Users/aidan/Documents/apache-tomcat-9.0.44/apache-tomcat-9.0.44/lib/tomcat-api.jar"/>
+	<classpathentry kind="lib" path="C:/Users/aidan/Documents/apache-tomcat-9.0.44/apache-tomcat-9.0.44/lib/tomcat-coyote.jar"/>
+	<classpathentry kind="lib" path="C:/Users/aidan/Documents/apache-tomcat-9.0.44/apache-tomcat-9.0.44/lib/tomcat-dbcp.jar"/>
+	<classpathentry kind="lib" path="C:/Users/aidan/Documents/apache-tomcat-9.0.44/apache-tomcat-9.0.44/lib/tomcat-i18n-cs.jar"/>
+	<classpathentry kind="lib" path="C:/Users/aidan/Documents/apache-tomcat-9.0.44/apache-tomcat-9.0.44/lib/tomcat-i18n-de.jar"/>
+	<classpathentry kind="lib" path="C:/Users/aidan/Documents/apache-tomcat-9.0.44/apache-tomcat-9.0.44/lib/tomcat-i18n-es.jar"/>
+	<classpathentry kind="lib" path="C:/Users/aidan/Documents/apache-tomcat-9.0.44/apache-tomcat-9.0.44/lib/tomcat-i18n-fr.jar"/>
+	<classpathentry kind="lib" path="C:/Users/aidan/Documents/apache-tomcat-9.0.44/apache-tomcat-9.0.44/lib/tomcat-i18n-ja.jar"/>
+	<classpathentry kind="lib" path="C:/Users/aidan/Documents/apache-tomcat-9.0.44/apache-tomcat-9.0.44/lib/tomcat-i18n-ko.jar"/>
+	<classpathentry kind="lib" path="C:/Users/aidan/Documents/apache-tomcat-9.0.44/apache-tomcat-9.0.44/lib/tomcat-i18n-pt-BR.jar"/>
+	<classpathentry kind="lib" path="C:/Users/aidan/Documents/apache-tomcat-9.0.44/apache-tomcat-9.0.44/lib/tomcat-i18n-ru.jar"/>
+	<classpathentry kind="lib" path="C:/Users/aidan/Documents/apache-tomcat-9.0.44/apache-tomcat-9.0.44/lib/tomcat-i18n-zh-CN.jar"/>
+	<classpathentry kind="lib" path="C:/Users/aidan/Documents/apache-tomcat-9.0.44/apache-tomcat-9.0.44/lib/tomcat-jdbc.jar"/>
+	<classpathentry kind="lib" path="C:/Users/aidan/Documents/apache-tomcat-9.0.44/apache-tomcat-9.0.44/lib/tomcat-jni.jar"/>
+	<classpathentry kind="lib" path="C:/Users/aidan/Documents/apache-tomcat-9.0.44/apache-tomcat-9.0.44/lib/tomcat-util.jar"/>
+	<classpathentry kind="lib" path="C:/Users/aidan/Documents/apache-tomcat-9.0.44/apache-tomcat-9.0.44/lib/tomcat-util-scan.jar"/>
+	<classpathentry kind="lib" path="C:/Users/aidan/Documents/apache-tomcat-9.0.44/apache-tomcat-9.0.44/lib/tomcat-websocket.jar"/>
+	<classpathentry kind="lib" path="C:/Users/aidan/Documents/apache-tomcat-9.0.44/apache-tomcat-9.0.44/lib/websocket-api.jar"/>
+	<classpathentry kind="lib" path="C:/Users/aidan/Downloads/jar_files/mysql-connector-java-8.0.19.jar"/>
+	<classpathentry kind="lib" path="C:/Users/aidan/Downloads/jar_files/protobuf-java-3.6.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/aidan/Downloads/jstl-api-1.2-sources.jar.zip"/>
+	<classpathentry kind="lib" path="C:/Users/aidan/Downloads/commons-logging-1.2-bin/commons-logging-1.2/commons-logging-1.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/aidan/Downloads/commons-logging-1.2-bin/commons-logging-1.2/commons-logging-1.2-javadoc.jar"/>
+	<classpathentry kind="lib" path="C:/Users/aidan/Downloads/commons-dbcp2-2.8.0-bin/commons-dbcp2-2.8.0/commons-dbcp2-2.8.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/aidan/Downloads/commons-dbcp2-2.8.0-bin/commons-dbcp2-2.8.0/commons-dbcp2-2.8.0-javadoc.jar"/>
+	<classpathentry kind="lib" path="C:/Users/aidan/Downloads/commons-dbcp2-2.8.0-bin/commons-dbcp2-2.8.0/commons-dbcp2-2.8.0-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Users/aidan/Downloads/commons-dbcp2-2.8.0-bin/commons-dbcp2-2.8.0/commons-dbcp2-2.8.0-tests.jar"/>
+	<classpathentry kind="lib" path="C:/Users/aidan/Downloads/commons-dbcp2-2.8.0-bin/commons-dbcp2-2.8.0/commons-dbcp2-2.8.0-test-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Users/aidan/Downloads/jstl-1.2.jar/jstl-1.2.jar"/>
+	<classpathentry kind="output" path="build/classes"/>
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
 </classpath>
