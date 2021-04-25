@@ -12,6 +12,13 @@
     
 <%@ page import="entity.User" %>
 
+<%
+    String contextPath = request.getContextPath();
+    String pathCssHome = contextPath + "/CSS/home.css";
+    String pathCssNav = contextPath + "/CSS/navigation.css";
+    String pathCssPopup = contextPath + "/CSS/popup.css";
+%>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,9 +27,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NS - Home</title>
-    <link rel="stylesheet" href="CSS/home.css">
-    <link rel="stylesheet" href="CSS/navigation.css">
-    <link rel="stylesheet" href="CSS/popup.css">
+    <link rel="stylesheet" href="<%=pathCssHome%>">
+    <link rel="stylesheet" href="<%=pathCssNav%>">
+    <link rel="stylesheet" href="<%=pathCssPopup%>">
     <script src="https://kit.fontawesome.com/0006047be0.js" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:ital@1&display=swap" rel="stylesheet">
@@ -134,11 +141,17 @@
       pageContext.setAttribute("isAdmin",isAdmin);
       pageContext.setAttribute("orderBy",orderBy);
       pageContext.setAttribute("toSearch",toSearch);
+
+    String pathHome = contextPath + "/home.jsp";
+    String pathPosts = contextPath + "/posts.jsp";
+    String pathDiscussion = contextPath + "/characterDescussion.jsp";
+    String pathDetails = contextPath + "/details.jsp";
+
       
       %>    
       
     <header>
-	<!-- 
+
     <div class="slideNav">
 
         <div class="menuFold">
@@ -153,24 +166,24 @@
             </div>
 
             <ul class="menuNav">
-                <li><a href="home.jsp" class="orange"><i class="fa fa-home fa-fw"></i>&nbsp; Home</a></li>
-                <li><a href="posts.jsp" class="yellow"><i class="fa fa-newspaper-o fa-fw"></i>&nbsp; Posts</a></li>
-                <li><a href="posts.jsp" class="green"><i class="fa fa-comments-o fa-fw"></i>&nbsp; Forum</a></li>
-                <li><a href="details.jsp" class="purple"><i class="fa fa-envelope fa-fw"></i>&nbsp; Contact</a></li>
-                <li><a href="details.jsp" class="red"><i class="fa fa-users fa-fw"></i>&nbsp; About</a></li>
+                <li><a href="<%=pathHome%>" class="orange"><i class="fa fa-home fa-fw"></i>&nbsp; Home</a></li>
+                <li><a href="<%=pathPosts%>" class="yellow"><i class="fa fa-newspaper-o fa-fw"></i>&nbsp; Posts</a></li>
+                <li><a href="<%=pathDiscussion%>" class="green"><i class="fa fa-comments-o fa-fw"></i>&nbsp; Discussion</a></li>
+                <li><a href="<%=pathDetails%>" class="purple"><i class="fa fa-envelope fa-fw"></i>&nbsp; Contact</a></li>
+                <li><a href="<%=pathDetails%>" class="red"><i class="fa fa-users fa-fw"></i>&nbsp; About</a></li>
             </ul>
 
             <a href="#" class="closeBtn"><i class="fa fa-close"></i>&nbsp; Close menu</a>
-            
-            
-    
+
+
+
             <a href="#"><i id="switchButton" class="fa fa-gg-circle"></i></a>
 
             <a href="#"><i id="accountButton" class="fa fa-user-circle"></i></a>
 
         </div>
 
-    </div>-->
+    </div>
 
 
     <h3 id="mainTitle">NerdStack</h3>
@@ -510,8 +523,22 @@
             <span>&copy; NerdStack Group</span>
         </footer>
 
-    <script src="js/jquery-3.5.1.js"></script>
-    <script src="js/navigation.js"></script>
-    <script src="js/popup.js"></script>
-    <script src="js/common.js"></script>
+<%
+    String pathJquery = contextPath + "js/jquery-3.5.1.js";
+    String pathJsNavigation = contextPath + "js/navigation.js";
+    String pathJsPopup = contextPath + "js/popup.js";
+    String pathJsCommon = contextPath + "js/common.js";
+%>
+
+    <script src="<%=pathJquery%>"></script>
+    <script src="<%=pathJsNavigation%>"></script>
+    <script src="<%=pathJsPopup%>"></script>
+    <script src="<%=pathJsCommon%>"></script>
+
+
+<%--    <script src="js/jquery-3.5.1.js"></script>--%>
+<%--    <script src="js/navigation.js"></script>--%>
+<%--    <script src="js/popup.js"></script>--%>
+<%--    <script src="js/common.js"></script>--%>
+
 </body>
