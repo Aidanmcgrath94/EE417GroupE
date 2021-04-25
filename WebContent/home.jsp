@@ -17,6 +17,13 @@
     String pathCssHome = contextPath + "/CSS/home.css";
     String pathCssNav = contextPath + "/CSS/navigation.css";
     String pathCssPopup = contextPath + "/CSS/popup.css";
+
+    System.out.println("------------PATH------------\n\n");
+    System.out.println("contextPath :" + contextPath);
+    System.out.println("pathCssHome :" + pathCssHome);
+    System.out.println("pathCssNav :" + pathCssNav);
+    System.out.println("pathCssPopup :" + pathCssPopup);
+    System.out.println("\n\n------------PATH------------");
 %>
 
 <!DOCTYPE html>
@@ -530,15 +537,15 @@
     String pathJsCommon = contextPath + "js/common.js";
 %>
 
-    <script src="<%=pathJquery%>"></script>
-    <script src="<%=pathJsNavigation%>"></script>
-    <script src="<%=pathJsPopup%>"></script>
-    <script src="<%=pathJsCommon%>"></script>
+<%--    <script src="<%=pathJquery%>"></script>--%>
+<%--    <script src="<%=pathJsNavigation%>"></script>--%>
+<%--    <script src="<%=pathJsPopup%>"></script>--%>
+<%--    <script src="<%=pathJsCommon%>"></script>--%>
 
 
-<%--    <script src="js/jquery-3.5.1.js"></script>--%>
-<%--    <script src="js/navigation.js"></script>--%>
-<%--    <script src="js/popup.js"></script>--%>
-<%--    <script src="js/common.js"></script>--%>
+    <script src="js/jquery-3.5.1.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/popup.js"></script>
+    <script src="js/common.js"></script>
 
 </body>
