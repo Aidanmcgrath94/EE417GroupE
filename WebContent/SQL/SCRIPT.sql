@@ -39,12 +39,6 @@ SELECT createdDate from post where _id=7;
 
 SELECT * FROM post;
 
-
-
-
-
-
-
 CREATE TABLE IF NOT EXISTS comments(
   _id INT UNSIGNED AUTO_INCREMENT,
   post_id integer,

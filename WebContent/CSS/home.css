@@ -299,3 +299,32 @@ footer {
 .comment-area input:hover {
   border: solid 1px #000000;
 }
+
+
+
+/* temp */
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color:	#4974a5 ;
+}
+
+li {
+  float: left;
+}
+
+li a, .dropbtn {
+  display: inline-block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover, .dropdown:hover .dropbtn {
+  background-color: aliceblue;
+  color: black;
+}
+

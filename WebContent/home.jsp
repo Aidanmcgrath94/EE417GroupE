@@ -40,6 +40,8 @@
     <script src="https://kit.fontawesome.com/0006047be0.js" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:ital@1&display=swap" rel="stylesheet">
+    
+	
 
 
 </head>
@@ -47,7 +49,7 @@
 <body>
 	<sql:setDataSource var = "snapshot" driver = "com.mysql.jdbc.Driver"
          url = "jdbc:mysql://localhost:3306"
-         user = "root"  password = "test"/>
+         user = "root"  password = "Hopper16!"/>
          
 	<!-- User object, do with it as you wish
 	I have just printed values for now
@@ -149,17 +151,26 @@
       pageContext.setAttribute("orderBy",orderBy);
       pageContext.setAttribute("toSearch",toSearch);
 
-    String pathHome = contextPath + "/home.jsp";
-    String pathPosts = contextPath + "/posts.jsp";
-    String pathDiscussion = contextPath + "/characterDescussion.jsp";
-    String pathDetails = contextPath + "/details.jsp";
-
-      
+   // String pathHome = contextPath + "/home.jsp";
+   // String pathPosts = contextPath + "/posts.jsp";
+   // String pathDiscussion = contextPath + "/characterDescussion.jsp";
+   // String pathDetails = contextPath + "/details.jsp"; 
       %>    
       
     <header>
 
-    <div class="slideNav">
+	 <div class="mt-3">
+	     <ul class="navbar">        
+                <li><a href="home.jsp">Home</a></li>
+                <li><a href="posts.jsp">Posts</a></li>
+                <li><a href="characterDescussion.jsp"> Discussion</a></li>
+                <li><a href="details.jsp">Contact</a></li>
+                <li><a href="details.jsp">About</a></li>
+	     </ul>
+	
+	 </div>
+
+    <!--<div class="slideNav">
 
         <div class="menuFold">
             <div class="menuBtn"><i class="fa fa-bars"></i></div>
@@ -173,11 +184,11 @@
             </div>
 
             <ul class="menuNav">
-                <li><a href="<%=pathHome%>" class="orange"><i class="fa fa-home fa-fw"></i>&nbsp; Home</a></li>
-                <li><a href="<%=pathPosts%>" class="yellow"><i class="fa fa-newspaper-o fa-fw"></i>&nbsp; Posts</a></li>
-                <li><a href="<%=pathDiscussion%>" class="green"><i class="fa fa-comments-o fa-fw"></i>&nbsp; Discussion</a></li>
-                <li><a href="<%=pathDetails%>" class="purple"><i class="fa fa-envelope fa-fw"></i>&nbsp; Contact</a></li>
-                <li><a href="<%=pathDetails%>" class="red"><i class="fa fa-users fa-fw"></i>&nbsp; About</a></li>
+                <li><a href="home.jsp" class="orange"><i class="fa fa-home fa-fw"></i>&nbsp; Home</a></li>
+                <li><a href="posts.jsp" class="yellow"><i class="fa fa-newspaper-o fa-fw"></i>&nbsp; Posts</a></li>
+                <li><a href="characterDescussion.jsp" class="green"><i class="fa fa-comments-o fa-fw"></i>&nbsp; Discussion</a></li>
+                <li><a href="details.jsp" class="purple"><i class="fa fa-envelope fa-fw"></i>&nbsp; Contact</a></li>
+                <li><a href="details.jsp" class="red"><i class="fa fa-users fa-fw"></i>&nbsp; About</a></li>
             </ul>
 
             <a href="#" class="closeBtn"><i class="fa fa-close"></i>&nbsp; Close menu</a>
